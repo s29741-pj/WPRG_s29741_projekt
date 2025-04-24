@@ -8,11 +8,11 @@ class Ticket
     public ?int $attachment_id;
     public string $title;
     public int $priority;
-    public ?DateTime $date_added;
-    public ?DateTime $date_closed;
-    public ?DateTime $date_deadline;
+    public ?string $date_added;
+    public ?string $date_closed;
+    public ?string $date_deadline;
 
-    public function __construct(int $ticket_id, int $department_id, int $user_id, ?int $attachment_id, string $title, int $priority, ?DateTime $date_added, ?DateTime $date_closed, ?DateTime $date_deadline)
+    public function __construct(int $ticket_id, int $department_id, int $user_id, ?int $attachment_id, string $title, int $priority, ?string $date_added, ?string $date_closed, ?string $date_deadline)
     {
         $this->ticket_id = $ticket_id;
         $this->department_id = $department_id;
@@ -21,6 +21,8 @@ class Ticket
         $this->title = $title;
         $this->priority = $priority;
         $this->date_added = $date_added;
+        $this->date_closed = $date_closed;
+        $this->date_deadline = $date_deadline;
     }
 
 }

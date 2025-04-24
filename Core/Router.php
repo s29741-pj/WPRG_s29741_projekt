@@ -16,11 +16,12 @@ class Router
         echo "Parsed path: $path<br>";
 
 
-//        if($path === '/'){
-//            header('Location: /ticket');
-//        }
 
-        if ($path === '/ticket' && $method === 'GET') {
+        if($path === '/ticketpro/'){
+            header('Location: /ticketpro/ticket');
+        }
+
+        if ($path === '/ticketpro/ticket' && $method === 'GET') {
             echo "Calling listTickets()<br>";
             $controller->listTickets();
         } else {
