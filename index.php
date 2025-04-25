@@ -1,5 +1,5 @@
 <?php
-echo "INDEX.PHP HIT<br>";
+//echo "INDEX.PHP HIT<br>";
 
 require_once 'Core/Router.php';
 require_once 'Controller/TicketController.php';

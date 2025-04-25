@@ -8,11 +8,12 @@
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Core/view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/TicketController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Ticket.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Ticket.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repository/TicketRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/TicketRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structure.txt" beforeDir="false" afterPath="$PROJECT_DIR$/structure.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +62,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
+    "settings.editor.selected.configurable": "preferences.editor",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -87,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1745528384695</updated>
       <workItem from="1745528385525" duration="3842000" />
-      <workItem from="1745532325414" duration="4178000" />
+      <workItem from="1745532325414" duration="5875000" />
     </task>
     <servers />
   </component>
