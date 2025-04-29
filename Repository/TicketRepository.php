@@ -41,7 +41,7 @@ class TicketRepository
             ");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //        here stop 25.04 modify array_map
-        return array_map(fn($row) => new Ticket($row['ticket_id'], $row['department_id'], $row['user_id'], $row['attachment_id'], $row['title'], $row['priority'], $row['date_added'], $row['date_closed'], $row['date_deadline']), $rows);
+        return array_map(fn($row) => new Ticket($row['ticket_id'], $row['title'], $row['priority'], $row['date_added'], $row['date_closed'], $row['date_deadline'], $row['department_name'], $row['email']), $rows);
     }
 
 }
