@@ -36,7 +36,7 @@ CREATE TABLE Tickets
     user_id       INT,
     attachment_id INT,
     title         VARCHAR(250),
-    priority      SMALLINT,
+    priority      VARCHAR(20),
     date_added    DATE,
     date_closed   DATE,
     date_deadline DATE,
@@ -118,16 +118,16 @@ VALUES (1, 1, 'IT'),
 -- =========================
 INSERT INTO Tickets (ticket_id, department_id, user_id, attachment_id, title, priority, date_added, date_closed,
                      date_deadline)
-VALUES (1, 1, 2, 1, 'System crash on login', 1, '2025-04-01', NULL, '2025-04-10'),
-       (2, 2, 3, 2, 'New employee onboarding', 2, '2025-04-02', '2025-04-06', '2025-04-05'),
-       (3, 3, 4, 3, 'Campaign performance report', 3, '2025-04-03', NULL, '2025-04-12'),
-       (4, 4, 5, 4, 'Missing financial data', 1, '2025-04-04', NULL, '2025-04-10'),
-       (5, 5, 6, 5, 'Quarterly sales forecast', 2, '2025-04-05', NULL, '2025-04-15'),
-       (6, 6, 7, 6, 'Customer complaint follow-up', 2, '2025-04-06', '2025-04-08', '2025-04-07'),
-       (7, 7, 8, 7, 'Contract review', 1, '2025-04-07', NULL, '2025-04-20'),
-       (8, 8, 9, 8, 'Warehouse delay', 3, '2025-04-08', NULL, '2025-04-18'),
-       (9, 9, 10, 9, 'Process automation request', 1, '2025-04-09', NULL, '2025-04-30'),
-       (10, 10, 1, 10, 'Prototype testing', 2, '2025-04-10', NULL, '2025-04-25');
+VALUES (1, 1, 2, 1, 'System crash on login', 'High', '2025-04-01', NULL, '2025-04-10'),
+       (2, 2, 3, 2, 'New employee onboarding', 'Medium', '2025-04-02', '2025-04-06', '2025-04-05'),
+       (3, 3, 4, 3, 'Campaign performance report', "Low", '2025-04-03', NULL, '2025-04-12'),
+       (4, 4, 5, 4, 'Missing financial data', 'High', '2025-04-04', NULL, '2025-04-10'),
+       (5, 5, 6, 5, 'Quarterly sales forecast', 'Medium', '2025-04-05', NULL, '2025-04-15'),
+       (6, 6, 7, 6, 'Customer complaint follow-up', 'Medium', '2025-04-06', '2025-04-08', '2025-04-07'),
+       (7, 7, 8, 7, 'Contract review', 'Low', '2025-04-07', NULL, '2025-04-20'),
+       (8, 8, 9, 8, 'Warehouse delay', 'High', '2025-04-08', NULL, '2025-04-18'),
+       (9, 9, 10, 9, 'Process automation request', 'Low', '2025-04-09', NULL, '2025-04-30'),
+       (10, 10, 1, 10, 'Prototype testing', 'Medium', '2025-04-10', NULL, '2025-04-25');
 
 -- =========================
 -- DANE: Comments

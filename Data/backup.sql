@@ -53,7 +53,7 @@ CREATE TABLE Tickets
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     title         VARCHAR(250),
-    priority      SMALLINT,
+    priority      VARCHAR(20),
     date_added    DATE,
     date_closed   DATE,
     date_deadline DATE

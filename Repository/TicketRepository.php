@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../Core/db.php';
+require_once __DIR__ . '/../Core/Data.php';
 require_once __DIR__ . '/../Model/Ticket.php';
 
 class TicketRepository
@@ -40,8 +40,7 @@ class TicketRepository
             ORDER BY t.ticket_id, c.comment_id;
             ");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//        here stop 25.04 modify array_map
-        return array_map(fn($row) => new Ticket($row['ticket_id'], $row['title'], $row['priority'], $row['date_added'], $row['date_closed'], $row['date_deadline'], $row['department_name'], $row['email']), $rows);
+        return array_map(fn($row) => new Ticket($row['ticket_id'], $row['title'], $row['priority'], $row['date_added'], $row['date_closed'], $row['date_deadline'], $row['department_name'], $row['user_email']), $rows);
     }
 
 }
