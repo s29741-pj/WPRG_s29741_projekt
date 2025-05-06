@@ -43,4 +43,23 @@ class TicketRepository
         return array_map(fn($row) => new Ticket($row['ticket_id'], $row['title'], $row['priority'], $row['date_added'], $row['date_closed'], $row['date_deadline'], $row['department_name'], $row['user_email']), $rows);
     }
 
+  public function getTicket($ticket_id){
+        $stmt = $this->pdo->query("
+            SELECT 
+                t.ticket_id,
+                t.title,
+                t.priority,
+                t.date_added,
+                t.date_closed,
+                t.date_deadline,
+                u.name AS user_name
+            FROM Tickets t
+            JOIN Users u ON t.user_id = u.user_id
+        ");
+  }
+
+  public function deleteTicket($ticket_id){
+
+  }
+
 }

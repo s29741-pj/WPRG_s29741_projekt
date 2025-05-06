@@ -1,18 +1,19 @@
 <?php
 
 require_once __DIR__ . '/../Controller/TicketController.php';
+require_once __DIR__ . '/../Controller/UserController.php';
 
 
 class Router
 {
     public function route($uri, $method){
 //        echo "Routing... URI: $uri, METHOD: $method<br>";
-        $controller = new TicketController();
+        $ticket_controller = new TicketController();
+        $user_controller = new UserController();
 
         $parsed = parse_url($uri);
         $path = $parsed['path'];
-        $query_string = ($parsed['query'] ?? '');
-
+//        $query_string = ($parsed['query'] ?? '');
 //        echo "Parsed path: $path<br>";
 
         if($path === '/ticketpro/'){
@@ -21,10 +22,15 @@ class Router
 
 
         if ($path === '/ticketpro/ticket' && $method === 'GET') {
-            $controller->listTickets();
+            $ticket_controller->listTickets();
         } elseif ($path === '/ticketpro/ticket/edit' && $method === 'GET'){
-            $controller->ticketEdit();
-        }else {
+            $ticket_controller->ticketEdit();
+        } elseif ($path === '/ticketpro/ticket/create' && $method === 'GET'){
+            $ticket_controller->ticketCreate();
+        } elseif ($path === '/ticketpro/login' && $method === 'GET'){
+            $user_controller->login();
+        }
+        else {
           echo "No matching route found.<br>";
         }
 

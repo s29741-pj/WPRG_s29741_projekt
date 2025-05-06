@@ -1,8 +1,13 @@
 <?php
 
-function render($viewPath, $data = []) {
+function renderSite($viewPath, $data = []) {
     include __DIR__ . '/../Views/layout/header.php';
     extract($data); // Converts keys in $data to variables
     include $viewPath;
     include __DIR__ . '/../Views/layout/footer.php';
+}
+
+function render($viewPath, $data = []) {
+    extract($data); // Converts keys in $data to variables
+    include $viewPath;
 }

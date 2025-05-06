@@ -1,3 +1,10 @@
+CREATE TABLE Roles
+(
+    role_id INT PRIMARY KEY NOT NULL,
+    role VARCHAR(50)
+);
+
+
 CREATE TABLE Attachments
 (
     attachment_id INT PRIMARY KEY NOT NULL,
@@ -12,9 +19,13 @@ CREATE TABLE Users
     account_type INT,
     name         VARCHAR(150),
     surname      VARCHAR(150),
-    email        VARCHAR(100) CHECK (email REGEXP '^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'
-)
-    );
+    email        VARCHAR(100) CHECK (email REGEXP '^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'),
+    password     VARCHAR(30),
+    FOREIGN KEY (account_type)
+        REFERENCES Roles (role_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
 
 
 CREATE TABLE Departments
@@ -71,6 +82,14 @@ CREATE TABLE Comments
 -- =========================
 -- DANE: Attachments
 -- =========================
+
+INSERT INTO Roles (role_id, role)
+VALUES  (1, 'Admin'),
+        (2, 'Department Head'),
+        (3, 'User');
+
+
+
 INSERT INTO Attachments (attachment_id, name, directory)
 VALUES (1, 'logo.png', '/attachments/logo.png'),
        (2, 'report.pdf', '/attachments/report.pdf'),
@@ -86,17 +105,17 @@ VALUES (1, 'logo.png', '/attachments/logo.png'),
 -- =========================
 -- DANE: Users
 -- =========================
-INSERT INTO Users (user_id, account_type, name, surname, email)
-VALUES (1, 1, 'Anna', 'Kowalska', 'anna.kowalska@example.com'),
-       (2, 2, 'Jan', 'Nowak', 'jan.nowak@example.com'),
-       (3, 3, 'Ewa', 'Wiśniewska', 'ewa.wisniewska@example.com'),
-       (4, 2, 'Tomasz', 'Wójcik', 'tomasz.wojcik@example.com'),
-       (5, 2, 'Karolina', 'Krawczyk', 'karolina.krawczyk@example.com'),
-       (6, 2, 'Michał', 'Mazur', 'michal.mazur@example.com'),
-       (7, 2, 'Zofia', 'Lewandowska', 'zofia.lewandowska@example.com'),
-       (8, 3, 'Paweł', 'Zieliński', 'pawel.zielinski@example.com'),
-       (9, 3, 'Natalia', 'Szymańska', 'natalia.szymanska@example.com'),
-       (10, 3, 'Mateusz', 'Dąbrowski', 'mateusz.dabrowski@example.com');
+INSERT INTO Users (user_id, account_type, name, surname, email, password)
+VALUES (1, 1, 'Anna', 'Kowalska', 'anna.kowalska@example.com', 'test1234'),
+       (2, 2, 'Jan', 'Nowak', 'jan.nowak@example.com', 'test1234'),
+       (3, 3, 'Ewa', 'Wiśniewska', 'ewa.wisniewska@example.com', 'test1234'),
+       (4, 2, 'Tomasz', 'Wójcik', 'tomasz.wojcik@example.com', 'test1234'),
+       (5, 2, 'Karolina', 'Krawczyk', 'karolina.krawczyk@example.com', 'test1234'),
+       (6, 2, 'Michał', 'Mazur', 'michal.mazur@example.com', 'test1234'),
+       (7, 2, 'Zofia', 'Lewandowska', 'zofia.lewandowska@example.com', 'test1234'),
+       (8, 3, 'Paweł', 'Zieliński', 'pawel.zielinski@example.com', 'test1234'),
+       (9, 3, 'Natalia', 'Szymańska', 'natalia.szymanska@example.com', 'test1234'),
+       (10, 3, 'Mateusz', 'Dąbrowski', 'mateusz.dabrowski@example.com', 'test1234');
 
 -- =========================
 -- DANE: Departments
