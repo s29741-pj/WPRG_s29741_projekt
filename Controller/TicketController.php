@@ -13,11 +13,15 @@ class TicketController
 
     public function listTickets(){
         $ticket_list =  $this->ticketRepo->getTickets();
-        $viewPath =  __DIR__ . '/../Views/ticket/ticket_list.php';
+        $viewPath = __DIR__ . '/../Views/ticket/ticket_list.php';
 //        var_dump($ticket_list);
         renderSite( $viewPath, ['tickets' => $ticket_list]);
     }
 
+    public function ticketMenu(){
+        $viewPath =  __DIR__ . '/../Views/ticket/ticket_menu.php';
+        render($viewPath);
+    }
     public function ticketEdit(){
         $viewPath =  __DIR__ . '/../Views/ticket/ticket_edit.php';
         render($viewPath);
@@ -25,6 +29,11 @@ class TicketController
 
     public function ticketCreate(){
         $viewPath =  __DIR__ . '/../Views/ticket/ticket_create.php';
+        render($viewPath);
+    }
+
+    public function advSearch(){
+        $viewPath =  __DIR__ . '/../Views/search/adv_search.php';
         render($viewPath);
     }
 }

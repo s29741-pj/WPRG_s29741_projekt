@@ -10,6 +10,8 @@ class Ticket
     public ?string $date_deadline;
     public string $department_name;
     public string $email;
+//    public string $attachment_name;
+//    public string $attachment_path;
 
 
     public function __construct(string $ticket_id, string $title, string $priority, string $date_added, ?string $date_closed, string $date_deadline, string $department_name, string $email)
