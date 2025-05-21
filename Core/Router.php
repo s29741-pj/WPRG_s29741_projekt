@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../Controller/TicketController.php';
+require_once __DIR__ . '/../Controller/Controller.php';
 require_once __DIR__ . '/../Controller/UserController.php';
 
 
@@ -9,7 +9,7 @@ class Router
     public function route($uri, $method)
     {
 //        echo "Routing... URI: $uri, METHOD: $method<br>";
-        $ticket_controller = new TicketController();
+        $controller = new Controller();
         $user_controller = new UserController();
 
         $parsed = parse_url($uri);
@@ -23,15 +23,17 @@ class Router
 
 
         if ($path === '/ticketpro/ticket' && $method === 'GET') {
-            $ticket_controller->ticketMenu();
-        } elseif ($path === '/ticketpro/ticket/list' && $method === 'GET') {
-            $ticket_controller->listTickets();
+            $controller->ticketMenu();
         } elseif ($path === '/ticketpro/ticket/edit' && $method === 'GET') {
-            $ticket_controller->ticketEdit();
+            $controller->ticketEdit();
         } elseif ($path === '/ticketpro/ticket/create' && $method === 'GET') {
-            $ticket_controller->ticketCreate();
+            $controller->ticketCreate();
+        } elseif ($path === '/ticketpro/ticket/view' && $method === 'POST') {
+            $controller->ticketView();
+        } elseif ($path === '/ticketpro/ticket/view' && $method === 'GET') {
+            $controller->ticketViewRender();
         } elseif ($path === '/ticketpro/ticket/search' && $method === 'GET') {
-            $ticket_controller->advSearch();
+            $controller->advSearch();
         } elseif ($path === '/ticketpro/login' && $method === 'GET') {
             $user_controller->login();
         } else {

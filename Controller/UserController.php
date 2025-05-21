@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Core/View.php';
+require_once __DIR__ . '/../Core/Render.php';
 
 
 

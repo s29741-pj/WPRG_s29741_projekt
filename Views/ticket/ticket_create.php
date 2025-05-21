@@ -1,6 +1,6 @@
 <?php
 require_once 'Core/Router.php';
-require_once 'Controller/TicketController.php';
+require_once 'Controller/Controller.php';
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
