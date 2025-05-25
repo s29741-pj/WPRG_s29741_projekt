@@ -2,11 +2,13 @@
 
 /** @var $selected_ticket */
 /** @var $departments */
-/** @var $users  */
+/** @var $users */
 /** @var $selected_ticket */
 
 ?>
 
+
+<!--DISPLAY FORM -->
 <div id="ticket-create" class="w-full h-100 bg-indigo-200 flex flex-row justify-around items-center">
     <div>
 
@@ -27,7 +29,9 @@
         <?php endif; ?>
     </div>
 
-    <form id="edit_form" class="h-full flex wrap flex-col justify-around items-start hidden" action="" name="edit_form">
+    <!--    EDIT FORM-->
+    <form id="edit_form" class="h-full flex wrap flex-col justify-around items-start hidden"
+          action="/Controller/TicketController.php" method="POST" name="edit_form">
         <label for="title">Title:
             <input class="bg-gray-100 ml-2 rounded" type="text" name="title">
         </label>
@@ -58,25 +62,23 @@
             </select>
         </label>
         <label for="attachment">Attachment:
-            <input type="file" class="text-sm text-stone-500 file:mr-5 file:py-1 file:px-3 file:border-[1px] file:text-xs file:font-medium file:bg-stone-50 file:text-stone-700 hover:file:cursor-pointer hover:file:bg-blue-50 hover:file:text-blue-700"/>
+            <input type="file"
+                   class="text-sm text-stone-500 file:mr-5 file:py-1 file:px-3 file:border-[1px] file:text-xs file:font-medium file:bg-stone-50 file:text-stone-700 hover:file:cursor-pointer hover:file:bg-blue-50 hover:file:text-blue-700"/>
         </label>
-        <label for="date-added">Date added:
-            <input class="bg-gray-100 ml-2 rounded" type="date" name="date-added">
-        </label>
-        <label for="date-closed">Date closed:
-            <input class="bg-gray-100 ml-2 rounded" type="date" name="date-closed">
+        <label for="date-closed">Is resolved?
+            <input class="bg-gray-100 ml-2 rounded" type="checkbox" name="date-closed">
         </label>
         <label for="date-deadline">Deadline:
             <input class="bg-gray-100 ml-2 rounded" type="date" name="date-deadline">
         </label>
+        <input value="Save" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">
     </form>
     <div class="flex flex-col gap-2">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Save</button>
-    <div class="flex flex-col gap-2">
-        <button onclick="hide('ticket-create'); toggleView('edit_btn')"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Close
-        </button>
+        <div class="flex flex-col gap-2">
+            <button onclick="hide('ticket-create'); toggleView('edit_btn')"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded">Close
+            </button>
+        </div>
+
+
     </div>
-
-
-</div>

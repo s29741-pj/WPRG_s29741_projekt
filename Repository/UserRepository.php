@@ -37,5 +37,15 @@ class UserRepository
 
     }
 
+    public function getUserIdByEmail($email){
+        $stmt = $this->pdo->query("
+            SELECT
+                user_id,
+            FROM Users
+            WHERE email = '$email'
+        ");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 }

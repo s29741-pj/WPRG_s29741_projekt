@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../Controller/Controller.php';
 require_once __DIR__ . '/../Controller/UserController.php';
+require_once __DIR__ . '/../Controller/TicketController.php';
 
 
 class Router
@@ -11,6 +12,7 @@ class Router
 //        echo "Routing... URI: $uri, METHOD: $method<br>";
         $controller = new Controller();
         $user_controller = new UserController();
+        $ticket_controller = new TicketController();
 
         $parsed = parse_url($uri);
         $path = $parsed['path'];
@@ -24,8 +26,6 @@ class Router
 
         if ($path === '/ticketpro/ticket' && $method === 'GET') {
             $controller->ticketMenu();
-        } elseif ($path === '/ticketpro/ticket/edit' && $method === 'GET') {
-            $controller->ticketEdit();
         } elseif ($path === '/ticketpro/ticket/create' && $method === 'GET') {
             $controller->ticketCreate();
         } elseif ($path === '/ticketpro/ticket/view' && $method === 'POST') {
@@ -36,10 +36,11 @@ class Router
             $controller->advSearch();
         } elseif ($path === '/ticketpro/login' && $method === 'GET') {
             $user_controller->login();
+        } elseif ($path === '/ticketpro/ticket/edit' && $method === 'POST') {
+            $ticket_controller->editTicket();
         } else {
             echo "No matching route found.<br>";
         }
-
     }
 
 }

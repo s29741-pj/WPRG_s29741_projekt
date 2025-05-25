@@ -70,22 +70,35 @@ class TicketRepository
             );
         }
         return $tickets;
-
-//        return array_map(fn($row) => Ticket::fromArray($row), $rows);
-
     }
 
-//    public function editTicket($ticket_id){
-//        $stmt = $this->pdo->query("
-//            UPDATE Tickets
-//            SET
-//
-//
-//
-//            WHERE ticket_id = $ticket_id;
-//
-//        ");
-//    }
+    public function getTicket($ticket_id){
+        $stmt = $this->pdo->query("
+            SELECT 
+                t.ticket_id,
+                t.title,
+                t.priority,
+                t.date_added,
+                t.date_closed,
+        ");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function editTicket($ticket_id, $title, $priority, $department, $responsible, $attachment, $is_resolved, $date_deadline){
+        $stmt = $this->pdo->query("
+            UPDATE Tickets t
+            SET
+            t.title = '$title',
+            t.priority = '$priority',
+            t.department_id = '$department',
+            t.user_id = '$responsible',
+            t.attachment_id = '$attachment',
+            t.is_resolved = '$is_resolved',
+            t.date_deadline = '$date_deadline'
+            WHERE ticket_id = $ticket_id;
+
+        ");
+    }
 
 
 //  public function deleteTicket($ticket_id){
