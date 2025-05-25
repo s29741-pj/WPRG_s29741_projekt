@@ -17,17 +17,17 @@ class ticketController
     public function editTicket()
     {
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_data'])) {
-//            chcę tu przekazać listę z danymi usera
-            $department_id = $this->departmentRepo->getIdByName();
-            $responsible_id = $this->userRepo->getUserIdByEmail($responsible)
+//        $ticket_id, $title, $priority, $department, $responsible, $attachment, $is_resolved, $date_deadline
 
-        }//        $ticket_id, $title, $priority, $department, $responsible, $attachment, $is_resolved, $date_deadline
-
-        ;
+        session_start();
+        $form_data = $_SESSION['form_data'];
 
 
-        $this->ticketRepo->editTicket($ticket_id, $title, $priority, $department_id, $responsible_id, $attachment, $is_resolved, $date_deadline);
+        $department_id = $this->departmentRepo->getIdByName($form_data['department']);;
+        $responsible_id = $this->userRepo->getUserIdByEmail($form_data['responsible']);
+
+
+        $this->ticketRepo->editTicket($form_data['ticket_id'], $form_data['title'], $form_data['priority'], $department_id, $responsible_id, $form_data['attachment'], $form_data['date_closed'], $form_data['date_deadline']);
 
     }
 

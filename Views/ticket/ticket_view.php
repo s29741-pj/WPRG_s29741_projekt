@@ -5,6 +5,33 @@
 /** @var $users */
 /** @var $selected_ticket */
 
+if (isset($_POST['edit_form'])) {
+    session_start();
+    $ticket_id = $_POST['ticket_id'];
+    $title = $_POST['title'];
+    $priority = $_POST['priority'];
+    $department = $_POST['department'];
+    $responsible = $_POST['responsible'];
+    $attachment = $_POST['attachment'];
+    $date_closed = $_POST['date-closed'];
+    $date_deadline = $_POST['date-deadline'];
+
+    $edit_form[] = [
+        'ticket_id' => $ticket_id,
+        'title' => $title,
+        'priority' => $priority,
+        'department' => $department,
+        'responsible' => $responsible,
+        'attachment' => $attachment,
+        'date_closed' => $date_closed,
+        'date_deadline' => $date_deadline
+    ];
+
+    $_SESSION['edit_form'] = $edit_form;
+
+
+}
+
 ?>
 
 
@@ -71,6 +98,7 @@
         <label for="date-deadline">Deadline:
             <input class="bg-gray-100 ml-2 rounded" type="date" name="date-deadline">
         </label>
+        <input type="hidden" name="edit_form" value="1">
         <input value="Save" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">
     </form>
     <div class="flex flex-col gap-2">
