@@ -5,79 +5,82 @@ CREATE TABLE Roles
 );
 
 
-CREATE TABLE Attachments
+CREATE TABLE Accounts
 (
-    attachment_id INT PRIMARY KEY NOT NULL,
-    name          VARCHAR(250),
-    directory     VARCHAR(500)
+    account_type INT PRIMARY KEY NOT NULL 
 );
-
 
 CREATE TABLE Users
 (
-    user_id      INT PRIMARY KEY NOT NULL,
+    user_id      INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     account_type INT,
-    name         VARCHAR(150),
-    surname      VARCHAR(150),
-    email        VARCHAR(100) CHECK (email REGEXP '^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'),
-    password     VARCHAR(30),
     FOREIGN KEY (account_type)
         REFERENCES Roles (role_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
+    name         VARCHAR(150),
+    surname      VARCHAR(150),
+    email        VARCHAR(100) CHECK (email REGEXP '^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'),
+    password     VARCHAR(30)
 );
-
 
 CREATE TABLE Departments
 (
-    department_id   INT PRIMARY KEY NOT NULL,
+    department_id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     user_id         INT,
-    department_name VARCHAR(250),
     FOREIGN KEY (user_id)
         REFERENCES Users (user_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
+    department_name VARCHAR(250)
 );
 
 
 CREATE TABLE Tickets
 (
-    ticket_id     INT PRIMARY KEY NOT NULL,
+    ticket_id     INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     department_id INT,
-    user_id       INT,
-    attachment_id INT,
-    title         VARCHAR(250),
-    priority      VARCHAR(20),
-    date_added    DATE,
-    date_closed   DATE,
-    date_deadline DATE,
     FOREIGN KEY (department_id)
         REFERENCES Departments (department_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
+    user_id       INT,
     FOREIGN KEY (user_id)
         REFERENCES Users (user_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    FOREIGN KEY (attachment_id)
-        REFERENCES Attachments (attachment_id)
+    title         VARCHAR(250),
+    priority      VARCHAR(20),
+    date_added    DATE,
+    date_closed   DATE,
+    date_deadline DATE
+);
+
+CREATE TABLE Attachments
+(
+    attachment_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    ticket_id INT NOT NULL,
+    file_name VARCHAR(255),
+    file_path VARCHAR(255),
+    uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ticket_id) 
+        REFERENCES Tickets(ticket_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
 CREATE TABLE Comments
 (
-    comment_id INT PRIMARY KEY NOT NULL,
+    comment_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     ticket_id  INT,
-    added      DATE,
-    modified   DATE,
-    content    VARCHAR(1000),
     FOREIGN KEY (ticket_id)
         REFERENCES Tickets (ticket_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
+    added      DATE,
+    modified   DATE,
+    content    VARCHAR(1000)
 );
-
 
 -- =========================
 -- DANE: Attachments
@@ -90,17 +93,6 @@ VALUES  (1, 'Admin'),
 
 
 
-INSERT INTO Attachments (attachment_id, name, directory)
-VALUES (1, 'logo.png', '/attachments/logo.png'),
-       (2, 'report.pdf', '/attachments/report.pdf'),
-       (3, 'invoice.docx', '/attachments/invoice.docx'),
-       (4, 'photo.jpg', '/attachments/photo.jpg'),
-       (5, 'archive.zip', '/attachments/archive.zip'),
-       (6, 'presentation.pptx', '/attachments/presentation.pptx'),
-       (7, 'diagram.svg', '/attachments/diagram.svg'),
-       (8, 'notes.txt', '/attachments/notes.txt'),
-       (9, 'manual.pdf', '/attachments/manual.pdf'),
-       (10, 'ticket.xlsx', '/attachments/ticket.xlsx');
 
 -- =========================
 -- DANE: Users
@@ -135,18 +127,18 @@ VALUES (1, 1, 'IT'),
 -- =========================
 -- DANE: Tickets
 -- =========================
-INSERT INTO Tickets (ticket_id, department_id, user_id, attachment_id, title, priority, date_added, date_closed,
+INSERT INTO Tickets (ticket_id, department_id, user_id, title, priority, date_added, date_closed,
                      date_deadline)
-VALUES (1, 1, 2, 1, 'System crash on login', 'High', '2025-04-01', NULL, '2025-04-10'),
-       (2, 2, 3, 2, 'New employee onboarding', 'Medium', '2025-04-02', '2025-04-06', '2025-04-05'),
-       (3, 3, 4, 3, 'Campaign performance report', "Low", '2025-04-03', NULL, '2025-04-12'),
-       (4, 4, 5, 4, 'Missing financial data', 'High', '2025-04-04', NULL, '2025-04-10'),
-       (5, 5, 6, 5, 'Quarterly sales forecast', 'Medium', '2025-04-05', NULL, '2025-04-15'),
-       (6, 6, 7, 6, 'Customer complaint follow-up', 'Medium', '2025-04-06', '2025-04-08', '2025-04-07'),
-       (7, 7, 8, 7, 'Contract review', 'Low', '2025-04-07', NULL, '2025-04-20'),
-       (8, 8, 9, 8, 'Warehouse delay', 'High', '2025-04-08', NULL, '2025-04-18'),
-       (9, 9, 10, 9, 'Process automation request', 'Low', '2025-04-09', NULL, '2025-04-30'),
-       (10, 10, 1, 10, 'Prototype testing', 'Medium', '2025-04-10', NULL, '2025-04-25');
+VALUES (1, 1, 2, 'System crash on login', 'High', '2025-04-01', NULL, '2025-04-10'),
+       (2, 2, 3, 'New employee onboarding', 'Medium', '2025-04-02', '2025-04-06', '2025-04-05'),
+       (3, 3, 4, 'Campaign performance report', "Low", '2025-04-03', NULL, '2025-04-12'),
+       (4, 4, 5, 'Missing financial data', 'High', '2025-04-04', NULL, '2025-04-10'),
+       (5, 5, 6, 'Quarterly sales forecast', 'Medium', '2025-04-05', NULL, '2025-04-15'),
+       (6, 6, 7, 'Customer complaint follow-up', 'Medium', '2025-04-06', '2025-04-08', '2025-04-07'),
+       (7, 7, 8, 'Contract review', 'Low', '2025-04-07', NULL, '2025-04-20'),
+       (8, 8, 9, 'Warehouse delay', 'High', '2025-04-08', NULL, '2025-04-18'),
+       (9, 9, 10, 'Process automation request', 'Low', '2025-04-09', NULL, '2025-04-30'),
+       (10, 10, 1, 'Prototype testing', 'Medium', '2025-04-10', NULL, '2025-04-25');
 
 -- =========================
 -- DANE: Comments
@@ -165,3 +157,6 @@ VALUES (1, 1, '2025-04-01', '2025-04-02', 'Issue confirmed.'),
 
 
 
+
+INSERT INTO Attachments (attachment_id, ticket_id, file_name, file_path)
+VALUES (1,1, 'logo.png', '/attachments/logo.png');

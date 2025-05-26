@@ -5,32 +5,7 @@
 /** @var $users */
 /** @var $selected_ticket */
 
-if (isset($_POST['edit_form'])) {
-    session_start();
-    $ticket_id = $_POST['ticket_id'];
-    $title = $_POST['title'];
-    $priority = $_POST['priority'];
-    $department = $_POST['department'];
-    $responsible = $_POST['responsible'];
-    $attachment = $_POST['attachment'];
-    $date_closed = $_POST['date-closed'];
-    $date_deadline = $_POST['date-deadline'];
 
-    $edit_form[] = [
-        'ticket_id' => $ticket_id,
-        'title' => $title,
-        'priority' => $priority,
-        'department' => $department,
-        'responsible' => $responsible,
-        'attachment' => $attachment,
-        'date_closed' => $date_closed,
-        'date_deadline' => $date_deadline
-    ];
-
-    $_SESSION['edit_form'] = $edit_form;
-
-
-}
 
 ?>
 
@@ -49,7 +24,7 @@ if (isset($_POST['edit_form'])) {
             <p>department name: <?php echo htmlspecialchars($selected_ticket->getDepartmentName()); ?></p>
             <p>owner: <?php echo htmlspecialchars($selected_ticket->getEmail()); ?></p>
             <p>Attachments:</p>
-            <p><?php echo htmlspecialchars($selected_ticket->getAName()); ?></p>
+<!--            <p>--><?php //echo htmlspecialchars($selected_ticket->getAName()); ?><!--</p>-->
             <p>Comments:</p>
             <p><?php echo htmlspecialchars($selected_ticket->getCCreated()); ?></p>
             <p><?php echo htmlspecialchars($selected_ticket->getCContent()); ?></p>
@@ -58,13 +33,14 @@ if (isset($_POST['edit_form'])) {
 
     <!--    EDIT FORM-->
     <form id="edit_form" class="h-full flex wrap flex-col justify-around items-start hidden"
-          action="/Controller/TicketController.php" method="POST" name="edit_form">
+          action="/ticketpro/ticket/edit" method="POST" name="edit_form"  enctype="multipart/form-data">
+        <input type="hidden" name="ticket_id" value="<?php echo htmlspecialchars($selected_ticket->getTicketId()); ?>">
         <label for="title">Title:
-            <input class="bg-gray-100 ml-2 rounded" type="text" name="title">
+            <input class="bg-gray-100 ml-2 rounded" type="text" name="title" value="<?php echo htmlspecialchars($selected_ticket->getTitle()); ?>">
         </label>
         <label for="priority">Priority:
             <select class="bg-gray-100 ml-2 rounded" name="priority" id="priority">
-                <option disabled selected value="">Select priority</option>
+                <option disabled selected value=""><?php echo htmlspecialchars($selected_ticket->getPriority()); ?></option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
@@ -72,7 +48,7 @@ if (isset($_POST['edit_form'])) {
         </label>
         <label for="department">Department:
             <select class="bg-gray-100 ml-2 rounded" name="department" id="department">
-                <option disabled selected value="">Select department</option>
+                <option disabled selected value="<?= $selected_ticket->getDepartmentId() ?>"><?php echo htmlspecialchars($selected_ticket->getDepartmentName()); ?></option>
                 <?php foreach ($departments as $department) : ?>
                     <option value="<?= $department->getDepartmentId() ?>">
                         <?= $department->getDepartmentName() ?></option>
@@ -81,7 +57,7 @@ if (isset($_POST['edit_form'])) {
         </label>
         <label for="responsible">Responsible:
             <select class="bg-gray-100 ml-2 rounded" name="responsible" id="responsible">
-                <option disabled selected value="">Select responsible</option>
+                <option disabled selected value="<?= $selected_ticket->getUserId() ?>"><?php echo htmlspecialchars($selected_ticket->getEmail()); ?></option>
                 <?php foreach ($users as $user) : ?>
                     <option value="<?= $user->getUserId() ?>">
                         <?= $user->getEmail() ?></option>
@@ -92,13 +68,12 @@ if (isset($_POST['edit_form'])) {
             <input type="file"
                    class="text-sm text-stone-500 file:mr-5 file:py-1 file:px-3 file:border-[1px] file:text-xs file:font-medium file:bg-stone-50 file:text-stone-700 hover:file:cursor-pointer hover:file:bg-blue-50 hover:file:text-blue-700"/>
         </label>
-        <label for="date-closed">Is resolved?
-            <input class="bg-gray-100 ml-2 rounded" type="checkbox" name="date-closed">
+        <label for="is_resolved">Is resolved?
+            <input class="bg-gray-100 ml-2 rounded" type="checkbox" name="is_resolved" value="1" <?= $selected_ticket->getDateClosed() ? 'checked' : '' ?>>
         </label>
-        <label for="date-deadline">Deadline:
-            <input class="bg-gray-100 ml-2 rounded" type="date" name="date-deadline">
+        <label for="date_deadline">Deadline:
+            <input class="bg-gray-100 ml-2 rounded" type="date" name="date_deadline" value="<?php echo htmlspecialchars($selected_ticket->getDateDeadline()); ?>">
         </label>
-        <input type="hidden" name="edit_form" value="1">
         <input value="Save" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">
     </form>
     <div class="flex flex-col gap-2">

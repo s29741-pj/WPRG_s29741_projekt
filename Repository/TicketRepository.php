@@ -30,12 +30,12 @@ class TicketRepository
                 t.date_added,
                 t.date_closed,
                 t.date_deadline,
+                t.user_id,
                 u.name AS user_name,
                 u.surname AS user_surname,
                 u.email AS user_email,
+                t.department_id,
                 d.department_name,
-                a.name AS attachment_name,
-                a.directory AS attachment_path,
                 c.comment_id,
                 c.added AS comment_added,
                 c.modified AS comment_modified,
@@ -43,7 +43,6 @@ class TicketRepository
             FROM Tickets t
             JOIN Users u ON t.user_id = u.user_id
             JOIN Departments d ON t.department_id = d.department_id
-            LEFT JOIN Attachments a ON t.attachment_id = a.attachment_id
             LEFT JOIN Comments c ON t.ticket_id = c.ticket_id
             ORDER BY t.ticket_id, c.comment_id;
             ");
@@ -57,12 +56,14 @@ class TicketRepository
                 $row['date_added'],
                 $row['date_closed'],
                 $row['date_deadline'],
+                $row['user_id'],
                 $row['user_name'],
                 $row['user_surname'],
                 $row['user_email'],
+                $row['department_id'],
                 $row['department_name'],
-                $row['attachment_name'],
-                $row['attachment_path'],
+//                $row['attachment_name'],
+//                $row['attachment_path'],
                 $row['comment_id'],
                 $row['comment_added'],
                 $row['comment_modified'],
@@ -84,22 +85,37 @@ class TicketRepository
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function editTicket($ticket_id, $title, $priority, $department, $responsible, $attachment, $is_resolved, $date_deadline){
-        $stmt = $this->pdo->query("
-            UPDATE Tickets t
-            SET
-            t.title = '$title',
-            t.priority = '$priority',
-            t.department_id = '$department',
-            t.user_id = '$responsible',
-            t.attachment_id = '$attachment',
-            t.is_resolved = '$is_resolved',
-            t.date_deadline = '$date_deadline'
-            WHERE ticket_id = $ticket_id;
+    public function editTicket($ticket_id, $title, $priority, $department, $responsible, $date_deadline, $is_resolved)
+    {
+        $fields = [];
 
-        ");
+        if (!empty($title)) {
+            $fields[] = "title = " . $this->pdo->quote($title);
+        }
+        if (!empty($priority)) {
+            $fields[] = "priority = " . $this->pdo->quote($priority);
+        }
+        if (!empty($department)) {
+            $fields[] = "department_id = " . $this->pdo->quote($department);
+        }
+        if (!empty($responsible)) {
+            $fields[] = "user_id = " . $this->pdo->quote($responsible);
+        }
+        if (!empty($attachment)) {
+            $fields[] = "attachment_id = " . $this->pdo->quote($attachment);
+        }
+        if (!is_null($is_resolved)) {
+            $fields[] = "date_closed = " . ($is_resolved ? $this->pdo->quote(date('Y-m-d')) : 'NULL');
+        }
+        if (!empty($date_deadline)) {
+            $fields[] = "date_deadline = " . $this->pdo->quote($date_deadline);
+        }
+
+        if (count($fields) > 0) {
+            $sql = "UPDATE Tickets SET " . implode(', ', $fields) . " WHERE ticket_id = " . $ticket_id;
+            $this->pdo->exec($sql);
+        }
     }
-
 
 //  public function deleteTicket($ticket_id){
 //

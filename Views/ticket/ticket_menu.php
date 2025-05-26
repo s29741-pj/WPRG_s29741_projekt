@@ -120,7 +120,6 @@ $active_id=null;
     <div class="w-full mt-4 p-10 rounded-lg bg-gray-100 shadow-lg">
         <table class="w-full table-auto">
             <tr>
-                <th></th>
                 <th>ID</th>
                 <th>Title</th>
                 <th>Priority</th>

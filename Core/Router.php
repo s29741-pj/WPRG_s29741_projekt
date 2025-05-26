@@ -36,8 +36,8 @@ class Router
             $controller->advSearch();
         } elseif ($path === '/ticketpro/login' && $method === 'GET') {
             $user_controller->login();
-        } elseif ($path === '/ticketpro/ticket/edit' && $method === 'POST') {
-            $ticket_controller->editTicket();
+        } elseif ($path === '/ticketpro/ticket/edit' && $method === 'POST' && isset($_POST['ticket_id'])) {
+            $ticket_controller->editTicket($_POST, $_FILES);
         } else {
             echo "No matching route found.<br>";
         }

@@ -9,9 +9,11 @@ class Ticket
     private ?string $date_added;
     private ?string $date_closed;
     private ?string $date_deadline;
+    private ?string $user_id;
     private ?string $name;
     private ?string $surname;
     private string $email;
+    private ?string $department_id;
     private string $department_name;
     private ?string $a_name;
     private ?string $a_path;
@@ -21,19 +23,21 @@ class Ticket
     private ?string $c_content;
 
 
-    public function __construct(string $ticket_id, string $title, string $priority, string $date_added, ?string $date_closed, string $date_deadline, ?string $name, ?string $surname, string $email, string $department_name, ?string $a_name, ?string $a_path, ?string $c_id, ?string $c_added, ?string $c_modified, ?string $c_content)
+    public function __construct(string $ticket_id, string $title, string $priority, string $date_added, ?string $date_closed, string $date_deadline,?string $user_id ,?string $name, ?string $surname, string $email, ?string $department_id , string $department_name, ?string $c_id, ?string $c_added, ?string $c_modified, ?string $c_content)
     {
         $this->ticket_id = $ticket_id;
         $this->title = $title;
         $this->priority = $priority;
         $this->date_added = $date_added;
         $this->date_closed = $date_closed;
+        $this->user_id = $user_id;
         $this->name = $name;
         $this->surname = $surname;
         $this->date_deadline = $date_deadline;
+        $this->department_id = $department_id;
         $this->department_name = $department_name;
-        $this->a_name = $a_name;
-        $this->a_path = $a_path;
+//        $this->a_name = $a_name;
+//        $this->a_path = $a_path;
         $this->c_id = $c_id;
         $this->c_added = $c_added;
         $this->c_modified = $c_modified;
@@ -94,6 +98,10 @@ class Ticket
         return $this->date_deadline;
     }
 
+    public function getUserId(): ?string{
+        return $this->user_id;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -102,6 +110,10 @@ class Ticket
     public function getSurname(): ?string
     {
         return $this->surname;
+    }
+
+    public function getDepartmentId(): ?string{
+        return $this->department_id;
     }
 
     public function getDepartmentName(): string
@@ -114,15 +126,15 @@ class Ticket
         return $this->email;
     }
 
-    public function getAName(): ?string
-    {
-        return $this->a_name;
-    }
-
-    public function getAPath(): ?string
-    {
-        return $this->a_path;
-    }
+//    public function getAName(): ?string
+//    {
+//        return $this->a_name;
+//    }
+//
+//    public function getAPath(): ?string
+//    {
+//        return $this->a_path;
+//    }
 
     public function getCCreated(): ?string
     {
@@ -175,6 +187,11 @@ class Ticket
         $this->date_deadline = $date_deadline;
     }
 
+    public function setUserId(string $user_id)
+    {
+        $this->user_id = $user_id;
+    }
+
     public function setName(string $name)
     {
         $this->name = $name;
@@ -188,6 +205,11 @@ class Ticket
     public function setEmail(string $email)
     {
         $this->email = $email;
+    }
+
+    public function setDepartmentId(string $department_id)
+    {
+        $this->department_id = $department_id;
     }
 
     public function setDepartmentName(string $department_name)

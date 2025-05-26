@@ -1,5 +1,6 @@
 <?php
 
+
 class ticketController
 {
 
@@ -14,21 +15,21 @@ class ticketController
         $this->userRepo = UserRepository::getInstance();
     }
 
-    public function editTicket()
+    public function editTicket(array $post, array $files)
     {
-
-//        $ticket_id, $title, $priority, $department, $responsible, $attachment, $is_resolved, $date_deadline
-
-        session_start();
-        $form_data = $_SESSION['form_data'];
-
-
-        $department_id = $this->departmentRepo->getIdByName($form_data['department']);;
-        $responsible_id = $this->userRepo->getUserIdByEmail($form_data['responsible']);
+        $ticket_id = $post['ticket_id'];
+        $title = $post['title'] ?? '';
+        $priority = $post['priority'] ?? '';
+        $department_id = $post['department'] ?? '';
+        $responsible_id = $post['responsible'] ?? '';
+        $date_deadline = $post['date_deadline'] ?? '';
+        $is_resolved = isset($post['is_resolved']) ? 1 : 0;
 
 
-        $this->ticketRepo->editTicket($form_data['ticket_id'], $form_data['title'], $form_data['priority'], $department_id, $responsible_id, $form_data['attachment'], $form_data['date_closed'], $form_data['date_deadline']);
+        $this->ticketRepo->editTicket($ticket_id, $title, $priority, $department_id, $responsible_id, $date_deadline, $is_resolved);
 
+        header('Location: /ticketpro/ticket');
+        exit;
     }
 
 }
