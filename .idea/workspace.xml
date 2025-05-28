@@ -5,15 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dbc7d92-401b-4819-a8be-cbbf4df9f249" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Repository/AttachmentRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/RenderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/TicketController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Render.php" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Render.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/backup.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Data/backup.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/setup_test_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Data/setup_test_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Attachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Attachment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Ticket.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Ticket.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repository/DepartmentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/DepartmentRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Repository/TicketRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/TicketRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_create.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +120,10 @@
       <workItem from="1747853632607" duration="7352000" />
       <workItem from="1748160962018" duration="1778000" />
       <workItem from="1748184142572" duration="7746000" />
-      <workItem from="1748288297413" duration="13962000" />
+      <workItem from="1748288297413" duration="14087000" />
+      <workItem from="1748373485715" duration="11376000" />
+      <workItem from="1748387645680" duration="2678000" />
+      <workItem from="1748469604861" duration="5082000" />
     </task>
     <servers />
   </component>

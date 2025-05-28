@@ -2,29 +2,34 @@
 require_once __DIR__ . '/../Repository/TicketRepository.php';
 require_once __DIR__ . '/../Repository/DepartmentRepository.php';
 require_once __DIR__ . '/../Repository/UserRepository.php';
+require_once __DIR__ . '/../Repository/AttachmentRepository.php';
 require_once __DIR__ . '/../Model/Ticket.php';
 require_once __DIR__ . '/../Core/Render.php';
 
 
 
-class Controller
+class RenderController
 {
     private $ticketRepo= null;
     private $departmentRepo = null;
     private $userRepo = null;
+    private $attachmentRepo = null;
     public function __construct()
     {
         $this->ticketRepo = TicketRepository::getInstance();
         $this->departmentRepo = DepartmentRepository::getInstance();
         $this->userRepo = UserRepository::getInstance();
+        $this->attachmentRepo = AttachmentRepository::getInstance();
     }
 
     public function ticketMenu()
     {
         $ticket_list = $this->ticketRepo->getTickets();
+        $attachment_list = $this->attachmentRepo->getAttachments();
+
 
         $viewPath = __DIR__ . '/../Views/ticket/ticket_menu.php';
-        renderSite($viewPath, ['tickets' => $ticket_list]);
+        renderSite($viewPath, ['ticket_list' => $ticket_list, 'attachment_list' => $attachment_list]);
     }
 
 

@@ -35,16 +35,11 @@ class TicketRepository
                 u.surname AS user_surname,
                 u.email AS user_email,
                 t.department_id,
-                d.department_name,
-                c.comment_id,
-                c.added AS comment_added,
-                c.modified AS comment_modified,
-                c.content AS comment_content
+                d.department_name
             FROM Tickets t
             JOIN Users u ON t.user_id = u.user_id
             JOIN Departments d ON t.department_id = d.department_id
-            LEFT JOIN Comments c ON t.ticket_id = c.ticket_id
-            ORDER BY t.ticket_id, c.comment_id;
+            ORDER BY t.ticket_id;
             ");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $tickets = [];
@@ -62,12 +57,12 @@ class TicketRepository
                 $row['user_email'],
                 $row['department_id'],
                 $row['department_name'],
-//                $row['attachment_name'],
-//                $row['attachment_path'],
-                $row['comment_id'],
-                $row['comment_added'],
-                $row['comment_modified'],
-                $row['comment_content']
+//                $row['comment_id'],
+//                $row['comment_added'],
+//                $row['comment_modified'],
+//                $row['comment_content'],
+//                $row['file_name'],
+//                $row['file_path']
             );
         }
         return $tickets;

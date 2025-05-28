@@ -2,12 +2,15 @@
 //foreach ($data['tickets'] as $ticket) {
 //    echo $ticket->getTicketId();
 //};
+
+//var_dump($attachment_list);
 //exit;
+//
+//$active_id = null;
 
-$active_id=null;
 
-
-/** @var Ticket[] $data */
+/** @var Ticket[] $ticket_list */
+/** @var Ticket[] $attachment_list */
 //echo "<script>console.log(" . json_encode($tickets_list[0], JSON_PRETTY_PRINT) . ");</script>";
 //
 ?>
@@ -38,6 +41,7 @@ $active_id=null;
         function hide(element) {
             document.getElementById(element).classList.add("hidden");
         }
+
         function toggleView(element) {
             document.getElementById(element).classList.toggle("hidden");
         }
@@ -46,7 +50,6 @@ $active_id=null;
         window.onload = function () {
             // const ticket_list = document.querySelectorAll('.id');
             // ticket_list.forEach(ticket => console.log(ticket.innerHTML));
-
 
 
             document.querySelectorAll('.title').forEach(row => {
@@ -128,17 +131,26 @@ $active_id=null;
                 <th>Date deadline</th>
                 <th>Department</th>
                 <th>Owner</th>
+                <th>Attachment</th>
             </tr>
-            <?php foreach ($data['tickets'] as $ticket): ?>
+            <?php foreach ($ticket_list as $ticket): ?>
                 <tr>
                     <td class="text-center p-2"><?= htmlspecialchars($ticket->getTicketId()) ?></td>
-                    <td class="title text-left underline text-blue-300 cursor-pointer" data-id='<?= htmlspecialchars($ticket->getTicketId());?>'><?= htmlspecialchars($ticket->getTitle()) ?></td>
+                    <td class="title text-left underline text-blue-300 cursor-pointer"
+                        data-id='<?= htmlspecialchars($ticket->getTicketId()); ?>'><?= htmlspecialchars($ticket->getTitle()) ?></td>
                     <td class="text-center"><?= htmlspecialchars($ticket->getPriority()) ?></td>
                     <td class="text-center"><?= htmlspecialchars($ticket->getDateAdded()) ?></td>
                     <td class="text-center"><?= htmlspecialchars($ticket->getDateClosed()) ?></td>
                     <td class="text-center"><?= htmlspecialchars($ticket->getDateDeadline()) ?></td>
                     <td class="text-center"><?= htmlspecialchars($ticket->getDepartmentName()) ?></td>
                     <td class="text-center"><?= htmlspecialchars($ticket->getEmail()) ?></td>
+                    <td class="text-center text-blue-500 text-underline">
+                        <?php foreach ($attachment_list as $attachment) {
+                            if ($attachment->getAssociatedTicketId() == $ticket->getTicketId()) {
+                                echo "<a href='" . htmlspecialchars($attachment->getFilePath()) . "'>" . htmlspecialchars($attachment->getFileName()) . "</a><br>";
+                            }
+                        } ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </table>

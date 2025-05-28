@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../Controller/Controller.php';
+require_once __DIR__ . '/../Controller/RenderController.php';
 require_once __DIR__ . '/../Controller/UserController.php';
 require_once __DIR__ . '/../Controller/TicketController.php';
 
@@ -10,7 +10,7 @@ class Router
     public function route($uri, $method)
     {
 //        echo "Routing... URI: $uri, METHOD: $method<br>";
-        $controller = new Controller();
+        $controller = new RenderController();
         $user_controller = new UserController();
         $ticket_controller = new TicketController();
 

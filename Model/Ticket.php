@@ -15,15 +15,15 @@ class Ticket
     private string $email;
     private ?string $department_id;
     private string $department_name;
-    private ?string $a_name;
-    private ?string $a_path;
-    private ?string $c_id;
-    private ?string $c_added;
-    private ?string $c_modified;
-    private ?string $c_content;
+//    private ?string $c_id;
+//    private ?string $c_added;
+//    private ?string $c_modified;
+//    private ?string $c_content;
+//    private ?string $a_name;
+//    private ?string $a_path;
 
 
-    public function __construct(string $ticket_id, string $title, string $priority, string $date_added, ?string $date_closed, string $date_deadline,?string $user_id ,?string $name, ?string $surname, string $email, ?string $department_id , string $department_name, ?string $c_id, ?string $c_added, ?string $c_modified, ?string $c_content)
+    public function __construct(string $ticket_id, string $title, string $priority, string $date_added, ?string $date_closed, string $date_deadline,?string $user_id ,?string $name, ?string $surname, string $email, ?string $department_id , string $department_name)
     {
         $this->ticket_id = $ticket_id;
         $this->title = $title;
@@ -36,13 +36,13 @@ class Ticket
         $this->date_deadline = $date_deadline;
         $this->department_id = $department_id;
         $this->department_name = $department_name;
+        $this->email = $email;
+//        $this->c_id = $c_id;
+//        $this->c_added = $c_added;
+//        $this->c_modified = $c_modified;
+//        $this->c_content = $c_content;
 //        $this->a_name = $a_name;
 //        $this->a_path = $a_path;
-        $this->c_id = $c_id;
-        $this->c_added = $c_added;
-        $this->c_modified = $c_modified;
-        $this->c_content = $c_content;
-        $this->email = $email;
     }
 
 
@@ -126,15 +126,15 @@ class Ticket
         return $this->email;
     }
 
-//    public function getAName(): ?string
-//    {
-//        return $this->a_name;
-//    }
-//
-//    public function getAPath(): ?string
-//    {
-//        return $this->a_path;
-//    }
+    public function getAName(): ?string
+    {
+        return $this->a_name;
+    }
+
+    public function getAPath(): ?string
+    {
+        return $this->a_path;
+    }
 
     public function getCCreated(): ?string
     {
