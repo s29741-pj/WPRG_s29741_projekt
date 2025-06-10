@@ -10,7 +10,13 @@
 
 
 /** @var Ticket[] $ticket_list */
-/** @var Ticket[] $attachment_list */
+/** @var Attachment[] $attachment_list */
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /ticketpro_app/");
+    exit;
+}
+
 //echo "<script>console.log(" . json_encode($tickets_list[0], JSON_PRETTY_PRINT) . ");</script>";
 //
 ?>
@@ -57,9 +63,7 @@
                     const ticketId = row.dataset.id;
                     // console.log(ticketId);
 
-                    toggleView('edit_btn');
-
-                    fetch('/ticketpro/ticket/view', {
+                    fetch('/ticketpro_app/ticket/view', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
@@ -77,6 +81,13 @@
             });
 
         };
+        document.getElementById("comments_section").style.display = "none";
+
+        function toggleComments() {
+            const section = document.getElementById("comments_section");
+            section.style.display = section.style.display === "none" ? "block" : "none";
+        }
+
 
     </script>
 
@@ -89,16 +100,15 @@
 <div class="w-full p-10">
     <div id="edit-container" class="mt-4 rounded"></div>
     <div class="w-full h-20 flex flex-row justify-around items-center bg-blue-200 rounded shadow-lg">
-        <button onclick="openOnSite('/ticketpro/ticket/create')"
+        <button onclick="openOnSite('/ticketpro_app/ticket/create')"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-6 rounded" name="new">New
         </button>
-        <button onclick="toggleView('edit_form')" id="edit_btn"
-                class="font-bold py-1 px-6 rounded bg-blue-500 hover:bg-blue-700 text-white hidden" name="edit">
-            Edit
-        </button>
-        <button class="bg-red-800 hover:bg-red-700 text-white font-bold py-1 px-6 rounded" name="delete">Delete</button>
-        <button onclick="openOnSite('/ticketpro/ticket/search')"
-                class="bg-yellow-500 hover:bg-gold-700 text-white font-bold py-1 px-4 rounded" type="submit">
+        <!--        <button onclick="toggleView('edit_form')" id="edit_btn"-->
+        <!--                class="font-bold py-1 px-6 rounded bg-blue-500 hover:bg-blue-700 text-white hidden" name="edit">-->
+        <!--            Edit-->
+        <!--        </button>-->
+        <button onclick="openOnSite('/ticketpro_app/ticket/search')"
+                class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-1 px-4 rounded" type="submit">
             Adv. search
         </button>
 
@@ -116,11 +126,18 @@
             </label>
         </form>
         <label for="export">
-            <button class="bg-green-800 hover:bg-green-700 text-white font-bold py-1 px-4 rounded" name="export">
-                Export
-            </button>
+<!--            <button class="bg-green-800 hover:bg-green-700 text-white font-bold py-1 px-4 rounded" name="export">-->
+<!--                Export-->
+<!--            </button>-->
+            <form action="/ticketpro_app/logout" method="GET">
+                <label for="logout">
+                    <button id="logout" class="bg-purple-800 hover:bg-purple-700 text-white font-bold py-1 px-4 rounded" name="logout">
+                        Logout
+                    </button>
+            </form>
+
     </div>
-    <div class="w-full mt-4 p-10 rounded-lg bg-gray-100 shadow-lg">
+    <div class="w-full mt-4 p-10 rounded-lg bg-cyan-50 shadow-lg">
         <table class="w-full table-auto">
             <tr>
                 <th>ID</th>
@@ -136,7 +153,7 @@
             <?php foreach ($ticket_list as $ticket): ?>
                 <tr>
                     <td class="text-center p-2"><?= htmlspecialchars($ticket->getTicketId()) ?></td>
-                    <td class="title text-left underline text-blue-300 cursor-pointer"
+                    <td class="title text-left underline text-blue-600 cursor-pointer"
                         data-id='<?= htmlspecialchars($ticket->getTicketId()); ?>'><?= htmlspecialchars($ticket->getTitle()) ?></td>
                     <td class="text-center"><?= htmlspecialchars($ticket->getPriority()) ?></td>
                     <td class="text-center"><?= htmlspecialchars($ticket->getDateAdded()) ?></td>
@@ -160,11 +177,11 @@
 
 
 <!--for dynamic load no refresh-->
-<!--<button onclick="openOnSite('/ticketpro/ticket/edit')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Go</button>-->
+<!--<button onclick="openOnSite('/ticketpro_app/ticket/edit')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Go</button>-->
 
 
 <!--for full reload-->
-<!--<a href="/ticketpro/ticket/edit">-->
+<!--<a href="/ticketpro_app/ticket/edit">-->
 <!--    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">-->
 <!--        Go-->
 <!--    </button>-->

@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /ticketpro_app/");
+    exit;
+}
+
 require_once 'Core/Router.php';
 require_once 'Controller/RenderController.php';
 ?>

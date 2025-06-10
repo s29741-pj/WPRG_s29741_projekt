@@ -35,6 +35,20 @@ class AttachmentRepository
         return array_map(fn($row) => Attachment::fromArray($row), $rows);
     }
 
+    public function getAttachmentById($ticket_id): array{
+        $stmt = $this->pdo->query("
+            SELECT
+                attachment_id,
+                ticket_id,
+                file_name,
+                file_path
+            FROM Attachments
+            WHERE ticket_id = $ticket_id
+        ");
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+
     public function addAttachment($ticket_id, $file_name, $file_path){
         $stmt = $this->pdo->prepare("
             INSERT INTO Attachments (ticket_id, file_name, file_path)

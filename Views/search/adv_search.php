@@ -1,7 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: /ticketpro_app/");
+    exit;
+}
+
+?>
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-<div id="ticket-create" class="w-full h-100 bg-yellow-600 flex flex-row justify-around items-center">
+<div id="ticket-create" class="w-full h-100 bg-gray-300 flex flex-row justify-around items-center">
     <form class="h-full flex wrap flex-col justify-around items-start" action="" name="new-ticket">
         <h2>Advanced search</h2>
         <label for="title">Title:

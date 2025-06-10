@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="d68b7d68-6158-4a64-b89b-6796b0528490" name="ticketpro_local" url="http://localhost/ticketpro">
-        <fileTransfer mountedRoot="D:\xampp\htdocs\ticketpro" accessType="MOUNT" port="0" />
+        <fileTransfer mountedRoot="D:\xampp\htdocs\ticketpro_app" accessType="MOUNT" port="0" />
       </webServer>
     </option>
   </component>

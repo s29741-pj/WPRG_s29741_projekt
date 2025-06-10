@@ -3,6 +3,7 @@ require_once __DIR__ . '/../Repository/TicketRepository.php';
 require_once __DIR__ . '/../Repository/DepartmentRepository.php';
 require_once __DIR__ . '/../Repository/UserRepository.php';
 require_once __DIR__ . '/../Repository/AttachmentRepository.php';
+//require_once __DIR__ . '/../Repository/CommentRepository.php';
 require_once __DIR__ . '/../Model/Ticket.php';
 require_once __DIR__ . '/../Core/Render.php';
 
@@ -14,12 +15,20 @@ class RenderController
     private $departmentRepo = null;
     private $userRepo = null;
     private $attachmentRepo = null;
+
+//    private $commentRepo = null;
     public function __construct()
     {
         $this->ticketRepo = TicketRepository::getInstance();
         $this->departmentRepo = DepartmentRepository::getInstance();
         $this->userRepo = UserRepository::getInstance();
         $this->attachmentRepo = AttachmentRepository::getInstance();
+//        $this->commentRepo = CommentRepository::getInstance();
+    }
+
+    public function loginPage(){
+        $viewPath = __DIR__ . '/../Views/login/login_page.php';
+        renderSite($viewPath);
     }
 
     public function ticketMenu()
@@ -51,6 +60,8 @@ class RenderController
         $departments = $this->departmentRepo->getDepartments();
         $viewPath = __DIR__ . '/../Views/ticket/ticket_view.php';
         $ticket_list = $this->ticketRepo->getTickets();
+        $attachment_list = $this->attachmentRepo->getAttachments();
+
         $selected_ticket = null;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ticket_id'])) {
@@ -59,7 +70,7 @@ class RenderController
         }
 
        ;
-        render($viewPath, ['selected_ticket' => $selected_ticket,'departments' => $departments, 'users' => $users]);
+        render($viewPath, ['selected_ticket' => $selected_ticket,'departments' => $departments, 'users' => $users, 'attachment_list' => $attachment_list]);
 
     }
 

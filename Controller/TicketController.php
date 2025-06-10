@@ -25,13 +25,13 @@ class ticketController
     {
 
         $filename = basename($files["attachment"]["name"]);
-        $file_url = 'http://localhost/ticketpro/Attachments/upload/' . rawurlencode($filename)  ?? '';
+        $file_url = 'http://localhost/ticketpro_app/Attachments/upload/' . rawurlencode($filename)  ?? '';
 
 
         if (empty($files["attachment"]["name"])) {
             $file_url = '';
         } else {
-            $file_url = 'http://localhost/ticketpro/Attachments/upload/' . rawurlencode($filename)  ?? '';
+            $file_url = 'http://localhost/ticketpro_app/Attachments/upload/' . rawurlencode($filename)  ?? '';
             $target_dir = realpath(__DIR__ . "\..\Attachments\upload") . "\\";
             $target_file = $target_dir . basename($files["attachment"]["name"]);
             $uploadOk = 1;
@@ -101,7 +101,7 @@ class ticketController
         }
         $this->ticketRepo->editTicket($ticket_id, $title, $priority, $department_id, $responsible_id, $date_deadline, $is_resolved);
 
-        header('Location: /ticketpro/ticket');
+        header('Location: /ticketpro_app/ticket');
         exit;
     }
 

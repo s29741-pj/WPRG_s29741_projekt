@@ -1,7 +1,10 @@
 <?php
 
-require_once 'Controller/UserController.php';
+session_start();
+use FlashMsg\msg;
+$msg = Msg::getInstance();
 
+$error = $msg->get_flash('login_error');
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -18,12 +21,13 @@ require_once 'Controller/UserController.php';
 </head>
 <body class="bg-gray-200 h-screen flex flex-col justify-between items-center">
 <div class="flex flex-col justify-around bg-white w-1/4 h-1/2 p-10 rounded-lg shadow-lg">
-    <form action="/Controller/UserController.php" class="h-full flex flex-col justify-around items-center" method="post">
+    <?php if($error){echo "<div class='text-center text-red-600'> $error </div>";}?>
+    <form action="/ticketpro_app/login" class="h-full flex flex-col justify-around items-center" method="POST">
         <label for="username">
-            <input class="border-2 border-indigo-600 p-2 rounded" type="text" name="username" placeholder="login">
+            <input class="w-90 border-2 border-indigo-600 p-2 rounded" type="text" name="username" placeholder="login" required>
         </label>
         <label for="password">
-            <input class="border-2 border-indigo-600 p-2 rounded" type="password" name="password" placeholder="password">
+            <input class="w-90 border-2 border-indigo-600 p-2 rounded" type="password" name="password" placeholder="password" required>
         </label>
         <label for="submit">
             <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" type="submit" value="Login">
@@ -33,6 +37,7 @@ require_once 'Controller/UserController.php';
         </label>
     </form>
     <button class="cursor-pointer hover:underline hover:text-red-400" type="submit">Forgotten password?</button>
+    <button class="cursor-pointer hover:underline hover:text-red-400" type="submit">Register</button>
 </div>
 </body>
 </html>

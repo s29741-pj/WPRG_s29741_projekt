@@ -5,16 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dbc7d92-401b-4819-a8be-cbbf4df9f249" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Repository/AttachmentRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/LoginController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/LogoutController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/RegisterController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Flash/Msg.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/login/register_page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/76af0a6f-7432-4a9e-9626-aad47f82b244.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/76af0a6f-7432-4a9e-9626-aad47f82b244.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/RenderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/RenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/RenderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/TicketController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Render.php" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Render.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Attachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Attachment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Ticket.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Ticket.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repository/DepartmentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/DepartmentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repository/TicketRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/TicketRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repository/AttachmentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/AttachmentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repository/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/CommentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/login/login_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login/login_page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/search/adv_search.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/search/adv_search.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_create.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_view.php" afterDir="false" />
@@ -86,8 +96,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-PS-251.23774.466" />
-        <option value="bundled-php-predefined-a98d8de5180a-aaeaa8632555-com.jetbrains.php.sharedIndexes-PS-251.23774.466" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-PS-251.26094.133" />
+        <option value="bundled-php-predefined-a98d8de5180a-c5828cf854d9-com.jetbrains.php.sharedIndexes-PS-251.26094.133" />
       </set>
     </attachedChunks>
   </component>
@@ -123,7 +133,17 @@
       <workItem from="1748288297413" duration="14087000" />
       <workItem from="1748373485715" duration="11376000" />
       <workItem from="1748387645680" duration="2678000" />
-      <workItem from="1748469604861" duration="5082000" />
+      <workItem from="1748469604861" duration="5303000" />
+      <workItem from="1748549906966" duration="43000" />
+      <workItem from="1748550227945" duration="2923000" />
+      <workItem from="1748651723247" duration="5176000" />
+      <workItem from="1748775023650" duration="2000" />
+      <workItem from="1749242878492" duration="18000" />
+      <workItem from="1749373818846" duration="3231000" />
+      <workItem from="1749390139285" duration="10313000" />
+      <workItem from="1749401423849" duration="75000" />
+      <workItem from="1749496382921" duration="72000" />
+      <workItem from="1749496505271" duration="16444000" />
     </task>
     <servers />
   </component>
