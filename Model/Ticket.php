@@ -12,9 +12,9 @@ class Ticket
     private ?string $user_id;
     private ?string $name;
     private ?string $surname;
-    private string $email;
+    private ?string $email;
     private ?string $department_id;
-    private string $department_name;
+    private ?string $department_name;
 //    private ?string $c_id;
 //    private ?string $c_added;
 //    private ?string $c_modified;
@@ -23,7 +23,7 @@ class Ticket
 //    private ?string $a_path;
 
 
-    public function __construct(string $ticket_id, string $title, string $priority, string $date_added, ?string $date_closed, string $date_deadline,?string $user_id ,?string $name, ?string $surname, string $email, ?string $department_id , string $department_name)
+    public function __construct(string $ticket_id, string $title, string $priority, string $date_added, ?string $date_closed, string $date_deadline,?string $user_id ,?string $name, ?string $surname, ?string $email, ?string $department_id , string $department_name)
     {
         $this->ticket_id = $ticket_id;
         $this->title = $title;
@@ -121,7 +121,7 @@ class Ticket
         return $this->department_name;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

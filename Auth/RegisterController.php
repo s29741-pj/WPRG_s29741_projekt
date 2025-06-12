@@ -1,4 +1,5 @@
 <?php
+use FlashMsg\msg;
 
 class RegisterController
 {
@@ -13,25 +14,37 @@ class RegisterController
         $this->msg = Msg::getInstance();
     }
 
-    public function registerAction(string $email, string $password)
+    public static function getInstance(): RegisterController {
+        if (self::$instance === null) {
+            self::$instance = new RegisterController();
+        }
+        return self::$instance;
+    }
+
+    public function registerAction($name, $surname, $email, $password)
     {
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt = $this->pdo->prepare("SELECT email FROM users WHERE email = ?");
         $stmt->execute([$email]);
+        session_start();
+
         if ($stmt->fetch())
         {
-            echo "Email jest już zarejestrowany.";
+            $this->msg->set_flash('register_error','Email address already in use.');
+            header("Location: /ticketpro_app/register_page");
             exit;
         }
-        // Hashuj hasło
         $hashed = password_hash($password, PASSWORD_DEFAULT);
 
-        // Zapisz do bazy
-        $stmt = $pdo->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
-        if ($stmt->execute([$email, $hashed])) {
-//            tu przekierowanie na login_page
+        $stmt = $this->pdo->prepare("INSERT INTO users (account_type, name, surname, email, password) VALUES (?, ?, ?, ?, ?)");
+        if ($stmt->execute([3,$name,$surname,$email, $hashed])) {
+            $this->msg->set_flash('register_success','Sign up successful.');
+            header("Location: /ticketpro_app/ticket");
+            exit;
         } else {
-            echo "Błąd podczas rejestracji.";
-//            tu przekierowanie na login_page
+
+            $this->msg->set_flash('register_error','Incorrect login or password. Try again.');
+            header("Location: /ticketpro_app/register_page");
+            exit;
         }
     }
 

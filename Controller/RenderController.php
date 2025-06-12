@@ -6,6 +6,9 @@ require_once __DIR__ . '/../Repository/AttachmentRepository.php';
 //require_once __DIR__ . '/../Repository/CommentRepository.php';
 require_once __DIR__ . '/../Model/Ticket.php';
 require_once __DIR__ . '/../Core/Render.php';
+require_once __DIR__ . '/../Flash/Msg.php';
+use FlashMsg\msg;
+
 
 
 
@@ -15,6 +18,7 @@ class RenderController
     private $departmentRepo = null;
     private $userRepo = null;
     private $attachmentRepo = null;
+
 
 //    private $commentRepo = null;
     public function __construct()
@@ -31,10 +35,16 @@ class RenderController
         renderSite($viewPath);
     }
 
+    public function registerPage(){
+        $viewPath = __DIR__ . '/../Views/login/register_page.php';
+        renderSite($viewPath);
+    }
+
     public function ticketMenu()
     {
         $ticket_list = $this->ticketRepo->getTickets();
         $attachment_list = $this->attachmentRepo->getAttachments();
+//        exit(var_dump($ticket_list));
 
 
         $viewPath = __DIR__ . '/../Views/ticket/ticket_menu.php';
@@ -44,8 +54,11 @@ class RenderController
 
     public function ticketCreate()
     {
+        $users = $this->userRepo->getUsers();
+        $departments = $this->departmentRepo->getDepartments();
+
         $viewPath = __DIR__ . '/../Views/ticket/ticket_create.php';
-        render($viewPath);
+        render($viewPath,['users' => $users, 'departments' => $departments]);
     }
 
     public function ticketViewRender()
@@ -69,7 +82,7 @@ class RenderController
             $selected_ticket = $ticket_list[$ticket_id-1];
         }
 
-       ;
+
         render($viewPath, ['selected_ticket' => $selected_ticket,'departments' => $departments, 'users' => $users, 'attachment_list' => $attachment_list]);
 
     }

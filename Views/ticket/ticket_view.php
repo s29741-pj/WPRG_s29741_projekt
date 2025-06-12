@@ -20,131 +20,152 @@ $commentRepo = CommentRepository::getInstance();
 
 
 <!--DISPLAY FORM -->
-<div id="ticket-create" class="w-full h-150 bg-indigo-200 flex flex-col justify-around items-center">
-    <div class="w-[60%] flex flex-row justify-between items-center">
-        <div>
-            <?php if ($selected_ticket !== null): ?>
-                <p>id: <?php echo htmlspecialchars($selected_ticket->getTicketId()); ?></p>
-                <p>title: <?php echo htmlspecialchars($selected_ticket->getTitle()); ?></p>
-                <p>priority: <?php echo htmlspecialchars($selected_ticket->getPriority()); ?></p>
-                <p>date added: <?php echo htmlspecialchars($selected_ticket->getDateAdded()); ?></p>
-                <p>date closed: <?php echo htmlspecialchars($selected_ticket->getDateClosed()); ?></p>
-                <p>date deadline: <?php echo htmlspecialchars($selected_ticket->getDateDeadline()); ?></p>
-                <p>department name: <?php echo htmlspecialchars($selected_ticket->getDepartmentName()); ?></p>
-                <p>owner: <?php echo htmlspecialchars($selected_ticket->getEmail()); ?></p>
-                <p>Attachments:</p>
-                <?php foreach ($attachment_list as $attachment) {
-                    if ($attachment->getAssociatedTicketId() == $selected_ticket->getTicketId()) {
-                        echo "<a class='text-blue-500 text-underline' href='" . htmlspecialchars($attachment->getFilePath()) . "'>" . htmlspecialchars($attachment->getFileName()) . "</a><br>";
-                    }
-                } ?>
-            <?php endif; ?>
-        </div>
+<div id="ticket-create" class="w-full bg-white rounded-lg p-6 space-y-6">
 
-        <!--    EDIT FORM-->
-        <form id="edit_form" class="h-full flex wrap flex-col justify-around items-start hidden"
-              action="/ticketpro_app/ticket/edit" method="POST" name="edit_form" enctype="multipart/form-data">
-            <input type="hidden" name="ticket_id"
-                   value="<?php echo htmlspecialchars($selected_ticket->getTicketId()); ?>">
-            <label for="title">Title:
-                <input class="bg-gray-100 ml-2 rounded" type="text" name="title"
-                       value="<?php echo htmlspecialchars($selected_ticket->getTitle()); ?>">
+
+    <?php if ($selected_ticket !== null): ?>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm text-gray-800">
+            <div><span class="font-semibold">ID:</span> <?= htmlspecialchars($selected_ticket->getTicketId()) ?></div>
+            <div><span class="font-semibold">Title:</span> <?= htmlspecialchars($selected_ticket->getTitle()) ?></div>
+            <div><span class="font-semibold">Priority:</span> <?= htmlspecialchars($selected_ticket->getPriority()) ?></div>
+            <div><span class="font-semibold">Date added:</span> <?= htmlspecialchars($selected_ticket->getDateAdded()) ?></div>
+            <div><span class="font-semibold">Date closed:</span> <?= htmlspecialchars($selected_ticket->getDateClosed()) ?></div>
+            <div><span class="font-semibold">Deadline:</span> <?= htmlspecialchars($selected_ticket->getDateDeadline()) ?></div>
+            <div><span class="font-semibold">Department:</span> <?= htmlspecialchars($selected_ticket->getDepartmentName()) ?></div>
+            <div><span class="font-semibold">Owner:</span> <?= htmlspecialchars($selected_ticket->getEmail()) ?></div>
+            <div class="col-span-2">
+                <span class="font-semibold">Attachments:</span>
+                <div class="flex flex-wrap gap-2 mt-1">
+                    <?php foreach ($attachment_list as $attachment): ?>
+                        <?php if ($attachment->getAssociatedTicketId() == $selected_ticket->getTicketId()): ?>
+                            <a class="text-blue-500 underline" href="<?= htmlspecialchars($attachment->getFilePath()) ?>">
+                                <?= htmlspecialchars($attachment->getFileName()) ?>
+                            </a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+
+    <div class="flex justify-end">
+        <button onclick="toggleView('edit_form')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+            Edit
+        </button>
+    </div>
+
+<!--Edit-->
+    <form id="edit_form" class="space-y-4 hidden" method="POST" action="/ticketpro_app/ticket/edit" enctype="multipart/form-data">
+        <input type="hidden" name="ticket_id" value="<?= htmlspecialchars($selected_ticket->getTicketId()) ?>">
+
+        <div class="grid grid-cols-2 gap-4">
+            <label class="flex flex-col">
+                Title:
+                <input type="text" name="title" class="bg-gray-100 rounded px-2 py-1"
+                       value="<?= htmlspecialchars($selected_ticket->getTitle()) ?>">
             </label>
-            <label for="priority">Priority:
-                <select class="bg-gray-100 ml-2 rounded" name="priority" id="priority">
-                    <option disabled selected
-                            value=""><?php echo htmlspecialchars($selected_ticket->getPriority()); ?></option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
-            </label>
-            <label for="department">Department:
-                <select class="bg-gray-100 ml-2 rounded" name="department" id="department">
-                    <option disabled selected
-                            value="<?= $selected_ticket->getDepartmentId() ?>"><?php echo htmlspecialchars($selected_ticket->getDepartmentName()); ?></option>
-                    <?php foreach ($departments as $department) : ?>
-                        <option value="<?= $department->getDepartmentId() ?>">
-                            <?= $department->getDepartmentName() ?></option>
+
+            <label class="flex flex-col">
+                Priority:
+                <select name="priority" class="bg-gray-100 rounded px-2 py-1">
+                    <?php foreach (['Low', 'Medium', 'High'] as $priority): ?>
+                        <option value="<?= $priority ?>" <?= $priority === $selected_ticket->getPriority() ? 'selected' : '' ?>><?= $priority ?></option>
                     <?php endforeach; ?>
                 </select>
             </label>
-            <label for="responsible">Responsible:
-                <select class="bg-gray-100 ml-2 rounded" name="responsible" id="responsible">
-                    <option disabled selected
-                            value="<?= $selected_ticket->getUserId() ?>"><?php echo htmlspecialchars($selected_ticket->getEmail()); ?></option>
-                    <?php foreach ($users as $user) : ?>
-                        <option value="<?= $user->getUserId() ?>">
-                            <?= $user->getEmail() ?></option>
+
+            <label class="flex flex-col">
+                Department:
+                <select name="department" class="bg-gray-100 rounded px-2 py-1">
+                    <?php foreach ($departments as $department): ?>
+                        <option value="<?= $department->getDepartmentId() ?>" <?= $department->getDepartmentId() == $selected_ticket->getDepartmentId() ? 'selected' : '' ?>>
+                            <?= $department->getDepartmentName() ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </label>
-            <label for="attachment">Attachment:
-                <input type="file" name="attachment" id="attachment"
-                       class="text-sm text-stone-500 file:mr-5 file:py-1 file:px-3 file:border-[1px] file:text-xs file:font-medium file:bg-stone-50 file:text-stone-700 hover:file:cursor-pointer hover:file:bg-blue-50 hover:file:text-blue-700"/>
+
+            <label class="flex flex-col">
+                Responsible:
+                <select name="responsible" class="bg-gray-100 rounded px-2 py-1">
+                    <?php foreach ($users as $user): ?>
+                        <option value="<?= $user->getUserId() ?>" <?= $user->getUserId() == $selected_ticket->getUserId() ? 'selected' : '' ?>>
+                            <?= $user->getEmail() ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </label>
-            <label for="is_resolved">Is resolved?
-                <input class="bg-gray-100 ml-2 rounded" type="checkbox" name="is_resolved"
-                       value="1" <?= $selected_ticket->getDateClosed() ? 'checked' : '' ?>>
+
+            <label class="flex flex-col col-span-2">
+                Attachment:
+                <input type="file" name="attachment" class="text-sm file:rounded file:px-3 file:py-1 file:border file:bg-stone-50 file:text-stone-700 hover:file:bg-blue-50" />
             </label>
-            <label for="date_deadline">Deadline:
-                <input class="bg-gray-100 ml-2 rounded" type="date" name="date_deadline"
-                       value="<?php echo htmlspecialchars($selected_ticket->getDateDeadline()); ?>">
+
+            <label class="flex items-center gap-2 col-span-1">
+                Is resolved?
+                <input type="checkbox" name="is_resolved" value="1" <?= $selected_ticket->getDateClosed() ? 'checked' : '' ?>>
             </label>
-            <input value="Save" type="submit"
-                   class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">
-        </form>
-    </div>
-    <div class="flex flex-row gap-2">
-        <div class="flex flex-row gap-4">
-            <button onclick="toggleView('edit_form')"
-                    class="font-bold py-1 px-6 rounded bg-blue-500 hover:bg-blue-700 text-white rounded" name="edit">
-                Edit
-            </button>
-            <button onclick="hide('ticket-create'); toggleView('edit_btn')"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Close
-            </button>
-            <button class="bg-red-800 hover:bg-red-700 text-white font-bold py-2 px-6 rounded" name="delete">Delete
-            </button>
+
+            <label class="flex flex-col">
+                Deadline:
+                <input type="date" name="date_deadline" class="bg-gray-100 rounded px-2 py-1"
+                       value="<?= htmlspecialchars($selected_ticket->getDateDeadline()) ?>">
+            </label>
         </div>
-    </div>
 
-    <div class="w-[90%] flex flex-col justify-around items-start bg-cyan-600 opacity-75 rounded p-4">
-        <p class='text-white p-2'>Comments:</p>
+        <div class="flex justify-end">
+            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Save</button>
+        </div>
+    </form>
 
-        <!-- Toggle button -->
-        <button onclick="toggleComments()"
-                class="mb-2 px-4 py-1 bg-white text-cyan-600 font-semibold rounded hover:bg-gray-100 transition">
-            Show/Hide Comments
+    <div  class="mt-2 space-y-2">
+        <!-- Trigger delete popup -->
+        <button type="button" onclick="showDeletePopup()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+            Delete ticket
         </button>
 
-        <!-- Comment section -->
-        <div id="comments_section" class="w-full transition-all duration-300 ease-in-out">
-            <?php foreach ($commentRepo->getCommentById($selected_ticket->getTicketId()) as $comment) {
-                echo "<div class='w-full flex flex-row justify-between'>" .
-                    "<p class='text-white p-2'>" . htmlspecialchars($comment["content"]) . "</p>" .
-                    "<p class='text-white text-xs'>" . $comment["author_email"] . " " . $comment["added"] . "</p>" .
-                    "</div>" .
-                    "<hr class='w-full border-.6 border-gray-1000'>";
-            } ?>
-        </div>
-
-        <!-- COMMENT FORM -->
-        <div class="w-full flex flex-row justify-center items-center mt-4">
-            <form id="comment_form" name="comment_form" action="/ticketpro_app/comment/add" method="POST">
-                <input type="hidden" name="ticket_id"
-                       value="<?php echo htmlspecialchars($selected_ticket->getTicketId()); ?>">
-                <label for="comment"></label>
-                <textarea name="comment" id="comment"
-                          class="w-300 max-h-20 border-2 border-black-500 bg-white opacity-100"
-                          maxlength="255" required></textarea>
-                <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded opacity-100"
-                        name="add_comment">
-                    Add comment
-                </button>
-            </form>
-        </div>
     </div>
 
 
+<!--Comments-->
+    <div class="bg-gray-100 rounded p-4">
+        <div class="flex justify-between items-center mb-2">
+            <p class="text-lg font-semibold">Comments</p>
+            <button onclick="toggleComments()" class="text-sm text-blue-600 hover:underline">Show/Hide</button>
+        </div>
+
+        <div id="comments_section" class="space-y-3">
+            <?php foreach ($commentRepo->getCommentById($selected_ticket->getTicketId()) as $comment): ?>
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <p class="text-gray-700"><?= htmlspecialchars($comment['content']) ?></p>
+                    <p class="text-xs text-gray-500 mt-1"><?= $comment['author_email'] ?> — <?= $comment['added'] ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+
+        <form action="/ticketpro_app/comment/add" method="POST" class="mt-4 space-y-2">
+            <input type="hidden" name="ticket_id" value="<?= htmlspecialchars($selected_ticket->getTicketId()) ?>">
+            <textarea name="comment" required maxlength="255" class="w-full rounded px-2 py-1 border"></textarea>
+            <button type="submit" class="bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded">Add comment</button>
+        </form>
+
+        <form action="/ticketpro_app/ticket/delete"></form>
+    </div>
 </div>
+
+<!-- Confirm delete popup -->
+<div id="deletePopup" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white p-6 rounded-xl shadow-lg max-w-sm w-full text-center">
+        <p class="text-lg font-semibold mb-4">Are you sure you want to delete this ticket?</p>
+        <div class="flex justify-center gap-4">
+            <form method="POST" action="/ticketpro_app/ticket/delete">
+                <input type="hidden" name="ticket_id" value="<?= htmlspecialchars($selected_ticket->getTicketId()) ?>">
+                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Ok</button>
+            </form>
+            <button onclick="hideDeletePopup()" class="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded">Cancel</button>
+        </div>
+    </div>
+</div>
+

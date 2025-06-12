@@ -13,7 +13,8 @@ class TicketRepository
         $this->pdo = connectToDB();
     }
 
-    public static function getInstance(): TicketRepository {
+    public static function getInstance(): TicketRepository
+    {
         if (self::$instance === null) {
             self::$instance = new TicketRepository();
         }
@@ -23,24 +24,24 @@ class TicketRepository
     public function getTickets(): array
     {
         $stmt = $this->pdo->query("
-            SELECT 
-                t.ticket_id,
-                t.title,
-                t.priority,
-                t.date_added,
-                t.date_closed,
-                t.date_deadline,
-                t.user_id,
-                u.name AS user_name,
-                u.surname AS user_surname,
-                u.email AS user_email,
-                t.department_id,
-                d.department_name
-            FROM Tickets t
-            JOIN Users u ON t.user_id = u.user_id
-            JOIN Departments d ON t.department_id = d.department_id
-            ORDER BY t.ticket_id;
-            ");
+    SELECT 
+        t.ticket_id,
+        t.title,
+        t.priority,
+        t.date_added,
+        t.date_closed,
+        t.date_deadline,
+        t.user_id,
+        u.name AS user_name,
+        u.surname AS user_surname,
+        u.email AS user_email,
+        t.department_id,
+        d.department_name
+    FROM Tickets t
+    LEFT JOIN Users u ON t.user_id = u.user_id
+    JOIN Departments d ON t.department_id = d.department_id
+    ORDER BY t.ticket_id;
+");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $tickets = [];
         foreach ($rows as $row) {
@@ -68,7 +69,8 @@ class TicketRepository
         return $tickets;
     }
 
-    public function getTicket($ticket_id){
+    public function getTicket($ticket_id)
+    {
         $stmt = $this->pdo->query("
             SELECT 
                 t.ticket_id,
@@ -76,7 +78,12 @@ class TicketRepository
                 t.priority,
                 t.date_added,
                 t.date_closed,
+                t.date_deadline
+            FROM Tickets t
+            WHERE t.ticket_id = $ticket_id
         ");
+//        exit(var_dump($stmt->fetchAll(PDO::FETCH_ASSOC)));
+
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -112,8 +119,33 @@ class TicketRepository
         }
     }
 
-//  public function deleteTicket($ticket_id){
-//
-//  }
+    public function addTicket($title, $priority, $department, $responsible, $date_deadline)
+    {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO Tickets (ticket_id, department_id,user_id, title, priority, date_added, date_deadline )
+            VALUES (?,?,?,?,?,?,?);
+        ");
+        $stmt->execute([self::getMaxId(), $department, $responsible, $title, $priority, date('Y-m-d'), $date_deadline]);
+    }
+
+    public function getMaxId(): ?int
+    {
+        $stmt = $this->pdo->query("SELECT MAX(ticket_id) FROM tickets");
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['MAX(ticket_id)'] + 1;
+    }
+
+    public function getLastTicket()
+    {
+        $stmt = $this->pdo->query("SELECT ticket_id FROM `tickets` ORDER BY ticket_id DESC LIMIT 1;");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function removeTicket($ticket_id){
+        $stmt = $this->pdo->prepare("DELETE FROM tickets WHERE ticket_id = ?;");
+        $stmt->execute([$ticket_id]);
+    }
+
+
 
 }

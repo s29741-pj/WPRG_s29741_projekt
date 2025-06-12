@@ -32,12 +32,20 @@ $error = $msg->get_flash('login_error');
         <label for="submit">
             <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" type="submit" value="Login">
         </label>
+    </form>
+    <form action="/ticketpro_app/guest" class="h-20 flex flex-col justify-around items-center">
         <label for="guest">
             <input class="bg-white-500 border-2 border-indigo-600 hover:bg-gray-300 text-blue-700 font-bold py-2 px-5 rounded" type="submit" value="Guest">
         </label>
     </form>
-    <button class="cursor-pointer hover:underline hover:text-red-400" type="submit">Forgotten password?</button>
-    <button class="cursor-pointer hover:underline hover:text-red-400" type="submit">Register</button>
+    <form action="/ticketpro_app/forgotten" class="h-20 flex flex-col justify-around items-center">
+        <label for="forgotten"></label>
+        <button id="forgotten" name="forgotten" class="cursor-pointer hover:underline hover:text-red-400" type="submit">Forgotten password?</button>
+    </form>
+    <form action="/ticketpro_app/register_page" method="GET"  class="h-20 flex flex-col justify-around items-center">
+        <label for="register"></label>
+        <button id="register" name="register" class="cursor-pointer hover:underline hover:text-red-400" type="submit">Sign Up</button>
+    </form>
 </div>
 </body>
 </html>

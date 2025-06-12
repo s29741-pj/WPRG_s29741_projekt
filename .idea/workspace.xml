@@ -5,30 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dbc7d92-401b-4819-a8be-cbbf4df9f249" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Auth/LoginController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Auth/LogoutController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Auth/RegisterController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Flash/Msg.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/login/register_page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/76af0a6f-7432-4a9e-9626-aad47f82b244.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/76af0a6f-7432-4a9e-9626-aad47f82b244.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/login/forgotten_password.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/upload_test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ticketpro_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ticketpro_app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/RenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/RenderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/TicketController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repository/AttachmentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/AttachmentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repository/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/CommentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Ticket.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Ticket.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repository/TicketRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/TicketRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/admin_panel/admin_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/admin_panel/admin_view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/login/login_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login/login_page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/search/adv_search.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/search/adv_search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/login/register_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login/register_page.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_create.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +38,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/todo.txt" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="a0b19e65-411d-461f-8bce-6d5d7bc6efe1" name="LocalHost" use_path_mappings="true">
@@ -66,33 +61,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;PHP Web Page.TicketPro.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/xampp/htdocs/ticketpro&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript Debug.admin_view.php.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "PHP Script.TicketRepository.php.executor": "Debug",
+    "PHP Web Page.TicketPro.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/xampp/htdocs/ticketpro",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mariadb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
     ]
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -144,6 +141,9 @@
       <workItem from="1749401423849" duration="75000" />
       <workItem from="1749496382921" duration="72000" />
       <workItem from="1749496505271" duration="16444000" />
+      <workItem from="1749586820088" duration="13141000" />
+      <workItem from="1749628758279" duration="8917000" />
+      <workItem from="1749669943253" duration="16884000" />
     </task>
     <servers />
   </component>

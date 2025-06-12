@@ -6,6 +6,7 @@ require_once __DIR__ . '/../Controller/TicketController.php';
 require_once __DIR__ . '/../Controller/CommentController.php';
 require_once __DIR__ . '/../Auth/LoginController.php';
 require_once __DIR__ . '/../Auth/LogoutController.php';
+require_once __DIR__ . '/../Auth/RegisterController.php';
 
 
 class Router
@@ -18,6 +19,7 @@ class Router
         $comment_controller = new CommentController();
         $loginController = LoginController::getInstance();
         $logoutController = new LogoutController();
+        $registerController = RegisterController::getInstance();
 //        $user_controller = new UserController();
 
         $parsed = parse_url($uri);
@@ -48,21 +50,36 @@ class Router
                 $password = $_POST['password'];
                 $loginController->loginAction($email, $password);
             } else {
-                echo "Brak wymaganych danych logowania.";
                 header("Location: /ticketpro_app/login_page.php");
                 exit;
             }
-        }elseif ($path === '/ticketpro_app/logout' && $method === 'GET') {
+        } elseif ($path === '/ticketpro_app/register' && $method === 'POST') {
+            if (isset($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password'])) {
+                $name = trim($_POST['name']);
+                $surname = trim($_POST['surname']);
+                $email = trim($_POST['email']);
+                $password = $_POST['password'];
+                $registerController->registerAction($name, $surname, $email, $password);
+            } else {
+                header("Location: /ticketpro_app/login_page.php");
+                exit;
+            }
+        } elseif ($path === '/ticketpro_app/register_page' && $method === 'GET') {
+            $render_controller->registerPage();
+        } elseif ($path === '/ticketpro_app/logout' && $method === 'GET') {
             $logoutController->logout();
-        }
-        elseif ($path === '/ticketpro_app/ticket/edit' && $method === 'POST' && isset($_POST['ticket_id'])) {
+        } elseif ($path === '/ticketpro_app/ticket/edit' && $method === 'POST' && isset($_POST['ticket_id'])) {
+//            exit($_POST['priority']);
             $ticket_controller->editTicket($_POST, $_FILES);
-        }elseif ($path === '/ticketpro_app/comment/add' && $method === 'POST' && isset($_POST['ticket_id'])) {
-            $comment_controller->addComment($_POST['ticket_id'],date('Y-m-d'),$_POST['comment'],1);
+        } elseif ($path === '/ticketpro_app/ticket/add' && $method === 'POST') {
+            $ticket_controller->addTicket($_POST, $_FILES);
+        } elseif ($path === '/ticketpro_app/comment/add' && $method === 'POST' && isset($_POST['ticket_id'])) {
+            $comment_controller->addComment($_POST['ticket_id'], date('Y-m-d'), $_POST['comment'], 1);
+        } elseif ($path === '/ticketpro_app/ticket/delete' && $method === 'POST') {
+            $ticket_controller->removeTicket($_POST['ticket_id']);
         }
         else {
             echo "No matching route found.<br>";
         }
     }
-
 }
