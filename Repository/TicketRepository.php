@@ -10,6 +10,10 @@ class TicketRepository
 
     public function __construct()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $this->pdo = connectToDB();
     }
 
@@ -146,6 +150,91 @@ class TicketRepository
         $stmt->execute([$ticket_id]);
     }
 
+    public function getFilteredTickets(string $filter = 'all', ?string $filterDate = null, ?string $priority = null): array
+    {
+    $query = "
+        SELECT 
+            t.ticket_id,
+            t.title,
+            t.priority,
+            t.date_added,
+            t.date_closed,
+            t.date_deadline,
+            t.user_id,
+            u.name AS user_name,
+            u.surname AS user_surname,
+            u.email AS user_email,
+            t.department_id,
+            d.department_name
+        FROM Tickets t
+        LEFT JOIN Users u ON t.user_id = u.user_id
+        JOIN Departments d ON t.department_id = d.department_id
+    ";
 
+    $conditions = [];
+    $params = [];
 
+    // Dla użytkownika
+    if ($filter === 'assigned' && isset($_SESSION['user_id'])) {
+        $conditions[] = 't.user_id = :user_id';
+        $params[':user_id'] = $_SESSION['user_id'];
+    }
+
+    // Zadania dla działu
+    if ($filter === 'department' && isset($_SESSION['department_id'])) {
+        $conditions[] = 't.department_id = :department_id';
+        $params[':department_id'] = $_SESSION['department_id'];
+    }
+
+    // Dla danego dnia (deadlinem)
+    if (!empty($filterDate)) {
+        $conditions[] = 'DATE(t.date_deadline) = :filter_date';
+        $params[':filter_date'] = $filterDate;
+    }
+
+    // Zadania niezakończone z priorytetem (backlog)
+    if ($filter === 'backlog' && $priority) {
+        $conditions[] = 't.priority = :priority AND t.date_closed IS NULL';
+        $params[':priority'] = $priority;
+    }
+
+    // Zadania dla danego dnia (np. dziś)
+    if ($filter === 'today') {
+        $conditions[] = 't.date_deadline = :today';
+        $params[':today'] = date('Y-m-d');
+    }
+
+    // Dodaj warunki do zapytania
+    if ($conditions) {
+        $query .= ' WHERE ' . implode(' AND ', $conditions);
+    }
+
+    $query .= " ORDER BY t.ticket_id";
+
+    // Przygotowanie i wykonanie zapytania
+    $stmt = $this->pdo->prepare($query);
+    $stmt->execute($params);
+
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Konwersja wyników na obiekty Ticket
+    $tickets = [];
+    foreach ($rows as $row) {
+        $tickets[] = new Ticket(
+            $row['ticket_id'],
+            $row['title'],
+            $row['priority'],
+            $row['date_added'],
+            $row['date_closed'],
+            $row['date_deadline'],
+            $row['user_id'],
+            $row['user_name'],
+            $row['user_surname'],
+            $row['user_email'],
+            $row['department_id'],
+            $row['department_name']
+        );
+    }
+    return $tickets;
+}
 }

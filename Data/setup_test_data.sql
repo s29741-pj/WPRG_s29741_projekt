@@ -7,14 +7,14 @@ CREATE TABLE Roles
 
 CREATE TABLE Accounts
 (
-    account_type INT PRIMARY KEY NOT NULL 
+    role_id INT PRIMARY KEY NOT NULL 
 );
 
 CREATE TABLE Users
 (
     user_id      INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    account_type INT,
-    FOREIGN KEY (account_type)
+    role_id INT,
+    FOREIGN KEY (role_id)
         REFERENCES Roles (role_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
@@ -97,7 +97,7 @@ VALUES  (1, 'Admin'),
 -- =========================
 -- DANE: Users
 -- =========================
-INSERT INTO Users (user_id, account_type, name, surname, email, password)
+INSERT INTO Users (user_id, role_id, name, surname, email, password)
 VALUES (1, 1, 'Anna', 'Kowalska', 'anna.kowalska@example.com', 'test1234'),
        (2, 2, 'Jan', 'Nowak', 'jan.nowak@example.com', 'test1234'),
        (3, 3, 'Ewa', 'Wiśniewska', 'ewa.wisniewska@example.com', 'test1234'),

@@ -142,6 +142,7 @@ class ticketController
         foreach ($requiredFields as $field) {
             if (empty($post[$field])) {
                 $this->msg->set_flash('edit_error', 'Error: Missing required field ' . $field);
+                exit('Error: Missing required field ' . $field);
                 header("Location: /ticketpro_app/ticket");
                 exit;
             }

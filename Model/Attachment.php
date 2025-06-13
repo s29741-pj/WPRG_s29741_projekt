@@ -2,10 +2,10 @@
 
 class Attachment
 {
-    public int $attachment_id;
-    public int $ticket_id;
-    public string $file_name;
-    public string $file_path;
+    private int $attachment_id;
+    private int $ticket_id;
+    private string $file_name;
+    private string $file_path;
 
 
     public function __construct(int $attachment_id, int $ticket_id, string $file_name, string $file_path)

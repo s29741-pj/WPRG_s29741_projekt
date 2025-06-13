@@ -35,7 +35,7 @@ class RegisterController
         }
         $hashed = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $this->pdo->prepare("INSERT INTO users (account_type, name, surname, email, password) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (role_id, name, surname, email, password) VALUES (?, ?, ?, ?, ?)");
         if ($stmt->execute([3,$name,$surname,$email, $hashed])) {
             $this->msg->set_flash('register_success','Sign up successful.');
             header("Location: /ticketpro_app/ticket");

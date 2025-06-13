@@ -7,14 +7,14 @@ CREATE TABLE Roles
 
 CREATE TABLE Accounts
 (
-    account_type INT PRIMARY KEY NOT NULL 
+    role_id INT PRIMARY KEY NOT NULL 
 );
 
 CREATE TABLE Users
 (
     user_id      INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    account_type INT,
-    FOREIGN KEY (account_type)
+    role_id INT,
+    FOREIGN KEY (role_id)
         REFERENCES Roles (role_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,

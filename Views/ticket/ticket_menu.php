@@ -2,8 +2,13 @@
 
 /** @var Ticket[] $ticket_list */
 /** @var Attachment[] $attachment_list */
-session_start();
-if (!isset($_SESSION['user_id'])) {
+
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id']) && !$_SESSION['role_id'] == 4) {
     header("Location: /ticketpro_app/");
     exit;
 }
@@ -11,12 +16,15 @@ if (!isset($_SESSION['user_id'])) {
 use FlashMsg\msg;
 
 $msg = Msg::getInstance();
+$loginCtrl = LoginController::getInstance();
 
 $login_success = $msg->get_flash('login_success');
 $signup_success = $msg->get_flash('register_success');
 
+
 //echo "<script>console.log(" . json_encode($tickets_list[0], JSON_PRETTY_PRINT) . ");</script>";
 //
+
 ?>
 
 <!doctype html>
@@ -82,6 +90,15 @@ $signup_success = $msg->get_flash('register_success');
                 });
             });
 
+            document.querySelector('select[name="filter"]').addEventListener('change', function () {
+                const prioritySelect = document.getElementById('priority-select');
+                if (this.value === 'backlog') {
+                    prioritySelect.style.display = 'flex';
+                } else {
+                    prioritySelect.style.display = 'none';
+                }
+            });
+
         };
         document.getElementById("comments_section").style.display = "none";
 
@@ -140,30 +157,65 @@ $signup_success = $msg->get_flash('register_success');
     <title>Document</title>
 </head>
 <body class="bg-gray-100 min-h-screen text-gray-800">
+<?php if (!$loginCtrl->is_logged_in()): ?>
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">
+        You are browsing as a guest. Please log in to add tickets or leave comments.
+    </div>
+<?php endif; ?>
 <div class="w-full p-10">
     <div class="w-full h-20 flex justify-between items-center bg-sky-700 rounded shadow-lg px-6 text-white">
-        <button onclick="openModal('create')" class="bg-white text-sky-700 px-4 py-2 rounded hover:bg-gray-100">
-            New
-        </button>
-        <form class="flex items-center gap-4" action="ticket_menu.php" method="POST">
-            <label class="flex items-center text-white">Filter:
-                <select class="ml-2 py-1 px-3 bg-white text-sky-800 border rounded" name="filter">
-                    <option value="all">All</option>
-                    <option value="assigned">Assigned to me</option>
-                    <option value="today">Mine for today</option>
-                    <option value="department">My department</option>
-                </select>
-            </label>
-        </form>
-        <form action="" class="flex items-center gap-4">
-            <label for="calendar" class="flex items-center text-white">Tasks by day:</label>
-            <input id="calendar" name="calendar" type="date" class="ml-2 py-1 px-3 bg-white text-sky-800 border rounded">
-        </form>
+        <?php if ($_SESSION['role_id'] != 4): ?>
+            <button onclick="openModal('create')" class="bg-white text-sky-700 px-4 py-2 rounded hover:bg-gray-100">
+                New
+            </button>
+            <form class="flex items-center gap-4" action="/ticketpro_app/ticket/filter" method="POST">
+                <label class="flex items-center text-white">Filter:
+                    <select class="ml-2 py-1 px-3 bg-white text-sky-800 border rounded" name="filter">
+                        <option value="all">All</option>
+                        <option value="assigned">Assigned to me</option>
+                        <option value="today">Mine for today</option>
+                        <option value="department">My department</option>
+                        <option value="backlog">Backlog (Priority)</option> <!-- Nowa opcja -->
+                    </select>
+                </label>
+
+                <!-- Pole do wyboru priorytetu -->
+                <label class="flex items-center text-white" id="priority-select" style="display: none;">Priority:
+                    <select class="ml-2 py-1 px-3 bg-white text-sky-800 border rounded" name="priority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </label>
+
+                <button type="submit" class="ml-4 bg-white text-sky-700 px-4 py-1 rounded hover:bg-gray-200">Apply
+                </button>
+
+                <label for="calendar" class="flex items-center text-white">Tasks by day:
+                    <input id="calendar" name="filter_date" type="date"
+                           class="ml-2 py-1 px-3 bg-white text-sky-800 border rounded">
+                </label>
+            </form>
+        <?php endif; ?>
+
+        <?php if ($_SESSION['role_id'] === 1): ?>
+            <form action="/ticketpro_app/admin">
+                <input type="submit" class="bg-teal-100 text-sky-700 px-4 py-2 rounded hover:bg-gray-100" value="Admin Panel">
+            </form>
+        <?php endif; ?>
+
+
         <form action="/ticketpro_app/logout" method="GET">
             <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-bold" name="logout">
                 Logout
             </button>
         </form>
+
+        <!--        <form action="/ticketpro_app/logout" method="GET">-->
+        <!--            <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-bold" name="logout">-->
+        <!--                Logout-->
+        <!--            </button>-->
+        <!--        </form>-->
     </div>
 
     <div class="w-full mt-6 p-6 rounded-lg bg-white shadow-lg">
@@ -199,7 +251,8 @@ $signup_success = $msg->get_flash('register_success');
                         <div class="flex flex-wrap gap-2">
                             <?php foreach ($attachment_list as $attachment): ?>
                                 <?php if ($attachment->getAssociatedTicketId() == $ticket->getTicketId()): ?>
-                                    <a href="<?= htmlspecialchars($attachment->getFilePath()) ?>" class="text-blue-500 underline">
+                                    <a href="<?= htmlspecialchars($attachment->getFilePath()) ?>"
+                                       class="text-blue-500 underline">
                                         <?= htmlspecialchars($attachment->getFileName()) ?>
                                     </a>
                                 <?php endif; ?>
@@ -215,22 +268,11 @@ $signup_success = $msg->get_flash('register_success');
 
 <div id="ticketModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
     <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl shadow-xl p-6 relative border border-gray-200">
-        <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">
+            &times;
+        </button>
         <div id="modalContent"></div>
     </div>
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

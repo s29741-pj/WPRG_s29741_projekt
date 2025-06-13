@@ -2,32 +2,33 @@
 class Department
 {
     private int $department_id;
-    private int $user_id;
     private string $department_name;
+    private int $department_head;
 
-    private function __construct (int $department_id, int $user_id, string $department_name)
+    private function __construct (int $department_id, int $department_head, string $department_name)
     {
         $this->department_id = $department_id;
-        $this->user_id = $user_id;
+        $this->department_head = $department_head;
         $this->department_name = $department_name;
     }
     public static function fromArray(array $data): self
     {
-        return new self($data['department_id'], $data['user_id'], $data['department_name']);
+        return new self($data['department_id'], $data['department_head'], $data['department_name']);
     }
 
     public function getDepartmentId(): int
     {
         return $this->department_id;
     }
-    public function getUserId(): int
+    public function getDepartmentHead(): int
     {
-        return $this->user_id;
+        return $this->department_head;
     }
     public function getDepartmentName(): string
     {
         return $this->department_name;
     }
+
 
     public function setDepartmentId(int $department_id){
         $this->department_id = $department_id;

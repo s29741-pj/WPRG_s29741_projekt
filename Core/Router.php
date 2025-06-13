@@ -7,6 +7,8 @@ require_once __DIR__ . '/../Controller/CommentController.php';
 require_once __DIR__ . '/../Auth/LoginController.php';
 require_once __DIR__ . '/../Auth/LogoutController.php';
 require_once __DIR__ . '/../Auth/RegisterController.php';
+require_once __DIR__ . '/../Controller/DepartmentController.php';
+require_once __DIR__ . '/../Controller/RoleController.php';
 
 
 class Router
@@ -20,7 +22,6 @@ class Router
         $loginController = LoginController::getInstance();
         $logoutController = new LogoutController();
         $registerController = RegisterController::getInstance();
-//        $user_controller = new UserController();
 
         $parsed = parse_url($uri);
         $path = $parsed['path'];
@@ -40,8 +41,6 @@ class Router
             $render_controller->ticketView();
         } elseif ($path === '/ticketpro_app/ticket/view' && $method === 'GET') {
             $render_controller->ticketViewRender();
-        } elseif ($path === '/ticketpro_app/ticket/search' && $method === 'GET') {
-            $render_controller->advSearch();
         } elseif ($path === '/ticketpro_app/debug' && $method === 'GET') {
             echo "Router działa i działa .htaccess";
         } elseif ($path === '/ticketpro_app/login' && $method === 'POST') {
@@ -77,8 +76,71 @@ class Router
             $comment_controller->addComment($_POST['ticket_id'], date('Y-m-d'), $_POST['comment'], 1);
         } elseif ($path === '/ticketpro_app/ticket/delete' && $method === 'POST') {
             $ticket_controller->removeTicket($_POST['ticket_id']);
+        } elseif ($path === '/ticketpro_app/login/guest' && $method === 'POST') {
+            $loginController->loginAsGuest();
+        } elseif ($path === '/ticketpro_app/ticket/filter' && $method === 'POST') {
+            $render_controller->ticketMenuWithFilter();
+        } elseif ($path === '/ticketpro_app/admin' && $method === 'GET') {
+            $render_controller->adminPanel();
+        } elseif ($path === '/ticketpro_app/admin/users' && $method === 'GET') {
+            $render_controller->manageUsers();
+        } elseif ($path === '/ticketpro_app/admin/departments' && $method === 'GET') {
+            $render_controller->manageDepartments();
+        } elseif ($path === '/ticketpro_app/admin/roles' && $method === 'GET') {
+            $render_controller->manageRoles();
+        } elseif ($path === '/ticketpro_app/admin/comments' && $method === 'GET') {
+            $render_controller->manageComments();
+        } elseif ($path === '/ticketpro_app/admin/users/edit' && $method === 'GET') {
+            $userController = new UserController();
+            $userController->editUserForm($_GET['id']); // usr edycja
+        } elseif ($path === '/ticketpro_app/admin/users/edit' && $method === 'POST') {
+            $userController = new UserController();
+            $userController->updateUser($_POST); // zapis
+        } elseif ($path === '/ticketpro_app/admin/users/delete' && $method === 'GET') {
+            $userController = new UserController();
+            $userController->deleteUser($_GET['id']); //  delete
+        } elseif ($path === '/ticketpro_app/admin/departments/edit' && $method === 'GET') {
+            $departmentController = new DepartmentController();
+            $departmentController->editDepartmentForm($_GET['id']); // dial edycja
+        } elseif ($path === '/ticketpro_app/admin/departments/edit' && $method === 'POST') {
+            $departmentController = new DepartmentController();
+            $departmentController->updateDepartment($_POST); // dzial update
+        } elseif ($path === '/ticketpro_app/admin/departments/delete' && $method === 'GET') {
+            $departmentController = new DepartmentController();
+            $departmentController->deleteDepartment($_GET['id']); // Usunięcie działu
+        } elseif ($path === '/ticketpro_app/admin/departments/add' && $method === 'GET') {
+            $departmentController = new DepartmentController();
+            $departmentController->addDepartmentForm(); // Formularz dodawania działu
+        } elseif ($path === '/ticketpro_app/admin/departments/add' && $method === 'POST') {
+            $departmentController = new DepartmentController();
+            $departmentController->storeDepartment($_POST); // Zapis nowego działu
+        } elseif ($path === '/ticketpro_app/admin/roles/add' && $method === 'GET') {
+            $roleController = new RoleController();
+            $roleController->addRoleForm();
+        } elseif ($path === '/ticketpro_app/admin/roles/add' && $method === 'POST') {
+            $roleController = new RoleController();
+            $roleController->storeRole($_POST);
+        } elseif ($path === '/ticketpro_app/admin/roles/edit' && $method === 'GET') {
+            $roleController = new RoleController();
+            $roleController->editRoleForm($_GET['id']);
+        } elseif ($path === '/ticketpro_app/admin/roles/edit' && $method === 'POST') {
+            $roleController = new RoleController();
+            $roleController->updateRole($_POST);
+        } elseif ($path === '/ticketpro_app/admin/roles/delete' && $method === 'GET') {
+            $roleController = new RoleController();
+            $roleController->deleteRole($_GET['id']);
         }
-        else {
+        elseif ($path === '/ticketpro_app/admin/comments/edit' && $method === 'GET') {
+            $comment_controller = new CommentController();
+            $comment_controller->editCommentForm((int)$_GET['id']);
+        } elseif ($path === '/ticketpro_app/admin/comments/edit' && $method === 'POST') {
+            $comment_controller = new CommentController();
+            $comment_controller->updateComment($_POST);
+        }
+        elseif ($path === '/ticketpro_app/admin/comments/delete' && $method === 'GET') {
+            $comment_controller = new CommentController();
+            $comment_controller->deleteComment((int)$_GET['id']);
+        } else {
             echo "No matching route found.<br>";
         }
     }

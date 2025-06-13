@@ -2,23 +2,25 @@
 
 class Comment
 {
-    public int $comment_id;
-    public int $ticket_id;
-    public DateTime $added;
-    public string $comment;
+    private int $comment_id;
+    private int $ticket_id;
+    private string $added;
+    private string $content;
 
-    public function __construct(int $comment_id, int $ticket_id, DateTime $added, string $comment)
+    private string $author;
+
+    public function __construct(int $comment_id, int $ticket_id, string $added, string $content,  string $author)
     {
         $this->comment_id = $comment_id;
         $this->ticket_id = $ticket_id;
         $this->added = $added;
-//        $this->modified = $modified;
-        $this->comment = $comment;
+        $this->content = $content;
+        $this->author = $author;
     }
 
     public static function fromArray(array $data): self
     {
-        return new self($data['comment_id'],$data['ticket_id'], $data['added'], $data['comment']);
+        return new self($data['comment_id'],$data['ticket_id'], $data['added'], $data['content'], $data['author']);
     }
 
     public function getCommentId(): int
@@ -30,12 +32,16 @@ class Comment
     {
         return $this->ticket_id;
     }
-    public function getAdded(): DateTime
+    public function getAdded(): string
     {
         return $this->added;
     }
-    public function getComment(): string
+    public function getContent(): string
     {
-        return $this->comment;
+        return $this->content;
+    }
+    public function getAuthor(): string
+    {
+        return $this->author;
     }
 }
