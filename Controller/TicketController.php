@@ -35,15 +35,17 @@ class ticketController
 
         // Check for empty required fields
         foreach ($requiredFields as $field) {
+            $router = new Router();
+
             if (empty($post[$field])) {
                 $this->msg->set_flash('edit_error', 'Error: Missing required field' . $field);
-                header("Location: /ticketpro_app/ticket");
+                header("Location:" . $router->getBasePath() . "/ticket");
                 exit;
             }
         }
 
         $filename = basename($files["attachment"]["name"]);
-        $file_url = 'http://localhost/ticketpro_app/Attachments/upload/' . rawurlencode($filename) ?? '';
+        $file_url = url('/Attachments/upload/') . rawurlencode($filename) ?? '';
         $files = $_FILES;
 
         self::fileUpload();
@@ -66,7 +68,7 @@ class ticketController
 
         if ($newDeadlineDate < $today && ($oldDeadlineDate === null || $newDeadlineDate < $oldDeadlineDate)) {
             $this->msg->set_flash('edit_error', 'Error: Deadline cannot be earlier than today.');
-            header("Location: /ticketpro_app/ticket");
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         }
 
@@ -76,7 +78,7 @@ class ticketController
         }
         $this->ticketRepo->editTicket($ticket_id, $title, $priority, $department_id, $responsible_id, $date_deadline, $is_resolved);
 
-        header('Location: /ticketpro_app/ticket');
+        header("Location:" . $router->getBasePath() . "/ticket");
         exit;
     }
 
@@ -143,7 +145,7 @@ class ticketController
             if (empty($post[$field])) {
                 $this->msg->set_flash('edit_error', 'Error: Missing required field ' . $field);
                 exit('Error: Missing required field ' . $field);
-                header("Location: /ticketpro_app/ticket");
+                header("Location:" . $router->getBasePath() . "/ticket");
                 exit;
             }
         }
@@ -161,9 +163,11 @@ class ticketController
         $deadlineDate = date('Y-m-d', strtotime($date_deadline));
 
         if ($deadlineDate < $today) {
+            $router = new Router();
+
             $this->msg->set_flash('edit_error', 'Error: Deadline cannot be earlier than today.');
 //            exit("date");
-            header("Location: /ticketpro_app/ticket");
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         }
 
@@ -171,24 +175,30 @@ class ticketController
 
 
         if (isset($_FILES['attachment'])) {
+            $router = new Router();
+
             $filename = basename($files["attachment"]["name"]);
-            $file_url = 'http://localhost/ticketpro_app/Attachments/upload/' . rawurlencode($filename) ?? '';
+            $file_url = url('/Attachments/upload/') . rawurlencode($filename) ?? '';
             $files = $_FILES;
             self::fileUpload();
             $new_ticket_id = $this->ticketRepo->getLastTicket();
             $this->attachmentRepo->addAttachment($new_ticket_id["ticket_id"], basename($files["attachment"]["name"]), $file_url);
-            header('Location: /ticketpro_app/ticket');
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         } else {
-            header('Location: /ticketpro_app/ticket');
+            $router = new Router();
+            
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         }
     }
 
     public function removeTicket($ticket_id)
     {
+        $router = new Router();
+
         $this->ticketRepo->removeTicket($ticket_id);
-        header('Location: /ticketpro_app/ticket');
+        header("Location:" . $router->getBasePath() . "/ticket");
         exit;
     }
 

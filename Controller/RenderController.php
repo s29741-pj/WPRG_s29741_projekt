@@ -114,9 +114,11 @@ class RenderController
 
     public function adminPanel()
     {
+        $router = new Router();
+
         // Sprawdzenie czy użytkownik jest adminem
         if ($_SESSION['role_id'] !== 1) {
-            header("Location: /ticketpro_app/ticket"); // Przekierowanie, jeśli brak uprawnień
+            header("Location:" . $router->getBasePath() . "/ticket"); // Przekierowanie, jeśli brak uprawnień
             exit;
         }
 
@@ -126,9 +128,11 @@ class RenderController
     }
     public function manageUsers()
     {
+        $router = new Router();
+
         // Sprawdź, czy użytkownik ma odpowiednie uprawnienia
         if ($_SESSION['role_id'] !== 1) {
-            header("Location: /ticketpro_app/ticket");
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         }
 
@@ -153,8 +157,11 @@ class RenderController
 
     public function manageDepartments()
     {
+        $router = new Router();
+
         if ($_SESSION['role_id'] !== 1) {
-            header("Location: /ticketpro_app/ticket");
+
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         }
 
@@ -167,8 +174,10 @@ class RenderController
 
     public function manageRoles()
     {
+        $router = new Router();
+
         if ($_SESSION['role_id'] !== 1) {
-            header("Location: /ticketpro_app/ticket");
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         }
 
@@ -181,8 +190,10 @@ class RenderController
 
     public function manageComments()
     {
+        $router = new Router();
+
         if ($_SESSION['role_id'] !== 1) {
-            header("Location: /ticketpro_app/ticket");
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         }
 

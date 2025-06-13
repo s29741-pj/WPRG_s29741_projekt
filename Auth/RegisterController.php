@@ -18,13 +18,15 @@ class RegisterController
 
     public function registerAction($name, $surname, $email, $password)
     {
+        $router = new Router();
+
         $stmt = $this->pdo->prepare("SELECT email FROM users WHERE email = ?");
         $stmt->execute([$email]);
         session_start();
 
         if ($stmt->fetch()) {
             $this->msg->set_flash('register_error', 'Email address already in use.');
-            header("Location: /ticketpro_app/register_page");
+            header("Location:" . $router->getBasePath() . "/register_page");
             exit;
         }
         $activation_token = bin2hex(random_bytes(32));
@@ -36,7 +38,7 @@ class RegisterController
         VALUES (?, ?, ?, ?, ?, 0, ?)
     ");
         if ($stmt->execute([3, $name, $surname, $email, $hashed_password, $activation_token])) {
-            $activation_link = "http://$_SERVER[HTTP_HOST]/ticketpro_app/activate_account?token=$activation_token";
+            $activation_link = "http://$_SERVER[HTTP_HOST]".url('/activate_account')."?token=$activation_token";
 
             $subject = "Account Activation";
             $message = "Dear $name,\n\nPlease click the link below to activate your account:\n\n$activation_link\n\nBest regards,\nTicketPro Team";
@@ -47,17 +49,19 @@ class RegisterController
             } else {
                 $this->msg->set_flash('register_error', 'Failed to send activation email.');
             }
-            header("Location: /ticketpro_app/register_page");
+            header("Location:" . $router->getBasePath() . "/register_page");
             exit;
         } else {
             $this->msg->set_flash('register_error', 'Failed to register account.');
-            header("Location: /ticketpro_app/register_page");
+            header("Location:" . $router->getBasePath() . "/register_page");
             exit;
         }
     }
 
     public function activateAccount($token)
     {
+        $router = new Router();
+
         $stmt = $this->pdo->prepare("SELECT user_id FROM users WHERE activation_token = ? AND is_active = 0");
         $stmt->execute([$token]);
 
@@ -66,13 +70,13 @@ class RegisterController
             $stmt = $this->pdo->prepare("UPDATE users SET is_active = 1, activation_token = NULL WHERE user_id = ?");
             if ($stmt->execute([$user['user_id']])) {
                 $this->msg->set_flash('register_success', 'Your account has been activated. You can now log in.');
-                header("Location: /ticketpro_app/");
+                header("Location:" . $router->getBasePath() . "/");
                 exit;
             }
         }
 
         $this->msg->set_flash('register_error', 'Invalid or expired activation link.');
-        header("Location: /ticketpro_app/register_page");
+        header("Location:" . $router->getBasePath() . "/register_page");
         exit;
     }
 

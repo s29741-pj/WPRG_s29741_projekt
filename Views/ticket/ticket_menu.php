@@ -9,7 +9,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user_id']) && !$_SESSION['role_id'] == 4) {
-    header("Location: /ticketpro_app/");
+    $router = new Router();
+    header("Location:" . $router->getBasePath() . "/");
     exit;
 }
 
@@ -39,16 +40,16 @@ $signup_success = $msg->get_flash('register_success');
 
     <script>
 
-        function openOnSite(path, container = 'edit-container') {
-            fetch(path, {
-                method: 'GET'
-            })
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById(container).innerHTML = html;
-                })
-                .catch(error => console.error('Error:', error));
-        }
+        // function openOnSite(path, container = 'edit-container') {
+        //     fetch(path, {
+        //         method: 'GET'
+        //     })
+        //         .then(response => response.text())
+        //         .then(html => {
+        //             document.getElementById(container).innerHTML = html;
+        //         })
+        //         .catch(error => console.error('Error:', error));
+        // }
 
         //
         function hide(element) {
@@ -73,7 +74,7 @@ $signup_success = $msg->get_flash('register_success');
                     const ticketId = row.dataset.id;
                     // console.log(ticketId);
 
-                    fetch('/ticketpro_app/ticket/view', {
+                    fetch('<?=url('/ticket/view')?>', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
@@ -111,8 +112,8 @@ $signup_success = $msg->get_flash('register_success');
 
         function openModal(viewType, ticketId = null) {
             const url = viewType === 'create'
-                ? '/ticketpro_app/ticket/create' // zakładamy GET
-                : '/ticketpro_app/ticket/view';  // tutaj POST
+                ? '<?=url('/ticket/create')?>' // zakładamy GET
+                : '<?=url('/ticket/view')?>';  // tutaj POST
 
             const options = viewType === 'view'
                 ? {
@@ -168,7 +169,7 @@ $signup_success = $msg->get_flash('register_success');
             <button onclick="openModal('create')" class="bg-white text-sky-700 px-4 py-2 rounded hover:bg-gray-100">
                 New
             </button>
-            <form class="flex items-center gap-4" action="/ticketpro_app/ticket/filter" method="POST">
+            <form class="flex items-center gap-4" action="<?= url('/ticket/filter')?>" method="POST">
                 <label class="flex items-center text-white">Filter:
                     <select class="ml-2 py-1 px-3 bg-white text-sky-800 border rounded" name="filter">
                         <option value="all">All</option>
@@ -199,23 +200,17 @@ $signup_success = $msg->get_flash('register_success');
         <?php endif; ?>
 
         <?php if ($_SESSION['role_id'] === 1): ?>
-            <form action="/ticketpro_app/admin">
+            <form action="<?= url('/admin')?>">
                 <input type="submit" class="bg-teal-100 text-sky-700 px-4 py-2 rounded hover:bg-gray-100" value="Admin Panel">
             </form>
         <?php endif; ?>
 
 
-        <form action="/ticketpro_app/logout" method="GET">
+        <form action="<?= url('/logout')?>" method="GET">
             <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-bold" name="logout">
                 Logout
             </button>
         </form>
-
-        <!--        <form action="/ticketpro_app/logout" method="GET">-->
-        <!--            <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-bold" name="logout">-->
-        <!--                Logout-->
-        <!--            </button>-->
-        <!--        </form>-->
     </div>
 
     <div class="w-full mt-6 p-6 rounded-lg bg-white shadow-lg">

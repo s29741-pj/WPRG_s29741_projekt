@@ -25,6 +25,8 @@ class DepartmentController
 
     public function updateDepartment($data)
     {
+        $router = new Router();
+
         if (isset($data['id'], $data['department_name'], $data['department_head'])) {
             try {
                 $this->departmentRepo->updateDepartment(
@@ -32,7 +34,7 @@ class DepartmentController
                     $data['department_name'],
                     (int)$data['department_head']
                 );
-                header("Location: /ticketpro_app/admin/departments");
+                header("Location:" . $router->getBasePath() . "/admin/departments");
             } catch (Exception $e) {
                 echo "Error saving changes: " . $e->getMessage();
             }
@@ -44,9 +46,11 @@ class DepartmentController
 
     public function deleteDepartment($id)
     {
+        $router = new Router();
+
         try {
             $this->departmentRepo->deleteDepartment((int)$id);
-            header("Location: /ticketpro_app/admin/departments");
+            header("Location:" . $router->getBasePath() . "/admin/departments");
         } catch (Exception $e) {
             echo "Error deleting department: " . $e->getMessage();
         }
@@ -60,13 +64,15 @@ class DepartmentController
 
     public function storeDepartment($data)
     {
+        $router = new Router();
+        
         if (isset($data['department_name'], $data['department_head'])) {
             try {
                 $this->departmentRepo->addDepartment(
                     $data['department_name'],
                     (int)$data['department_head']
                 );
-                header("Location: /ticketpro_app/admin/departments");
+                header("Location:" . $router->getBasePath() . "/admin/departments");
             } catch (Exception $e) {
                 echo "Error adding department: " . $e->getMessage();
             }

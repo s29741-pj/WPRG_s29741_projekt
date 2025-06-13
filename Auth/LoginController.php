@@ -30,25 +30,31 @@ class LoginController
 
 
         if ($user && password_verify($password, $user['password'])) {
+            $router = new Router();
+
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['role_id'] = $user['role_id'];
             $_SESSION['department_id'] = $user['department_id'];
             $this->msg->set_flash('login_success','Login successful.');
 //            exit(var_dump($_SESSION['user_id']));
-            header("Location: /ticketpro_app/ticket");
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         } else {
+            $router = new Router();
+
             $this->msg->set_flash('login_error','Incorrect login or password. Try again.');
-            header("Location: /ticketpro_app/");
+            header("Location:" . $router->getBasePath() . "/");
         }
     }
 
     public function loginAsGuest(): void {
+        $router = new Router();
+
         $roles = $this->roleRepository->listRoles();
         session_start();
         $_SESSION['role_id'] = $roles[3]->getRoleId();
-        header("Location: /ticketpro_app/ticket");
+        header("Location:" . $router->getBasePath() . "/ticket");
         exit;
     }
 
@@ -79,6 +85,7 @@ class LoginController
         $user = $stmt->fetch();
 
         if ($user) {
+            $router = new Router();
 
             $reset_token = bin2hex(random_bytes(32));
             $token_expiry = (new DateTime())->modify('+1 hour')->format('Y-m-d H:i:s');
@@ -88,7 +95,7 @@ class LoginController
             $stmt->execute([$reset_token, $token_expiry, $user['user_id']]);
 
 
-            $reset_link = "http://$_SERVER[HTTP_HOST]/ticketpro_app/reset_password?token=$reset_token";
+            $reset_link = "http://$_SERVER[HTTP_HOST]" . url('/reset_password') . "?token=$reset_token";
 
 
             $subject = "Password Reset Request";
@@ -104,12 +111,13 @@ class LoginController
             $this->msg->set_flash('reset_error', 'No account found with this email.');
         }
 
-        header("Location: /ticketpro_app/forgotten");
+        header("Location:" . $router->getBasePath() . "/forgotten");
         exit;
     }
 
     public function resetPassword($token, $password)
     {
+        $router = new Router();
 
         $stmt = $this->pdo->prepare("
         SELECT user_id, reset_token_expiry FROM users 
@@ -124,11 +132,12 @@ class LoginController
             $stmt->execute([$hashed_password, $user['user_id']]);
 
             $this->msg->set_flash('reset_success', 'Your password has been reset. You can now log in.');
-            header("Location: /ticketpro_app/");
+            header("Location:" . $router->getBasePath() . "/");
             exit;
         } else {
+
             $this->msg->set_flash('reset_error', 'Invalid or expired reset token.');
-            header("Location: /ticketpro_app/forgotten");
+            header("Location:" . $router->getBasePath() . "/forgotten");
             exit;
         }
     }

@@ -3,7 +3,9 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /ticketpro_app/");
+    $router = new Router();
+
+    header("Location:" . $router->getBasePath() . "/");
     exit;
 }
 
@@ -16,7 +18,7 @@ require_once 'Controller/RenderController.php';
 
 
 <div id="ticket-create" class="w-full h-200 bg-gray-100 flex flex-row justify-around items-center rounded p-4">
-    <form class="h-full flex wrap flex-col justify-around items-start" action="/ticketpro_app/ticket/add" method="POST" enctype="multipart/form-data">
+    <form class="h-full flex wrap flex-col justify-around items-start" action="<?=url('/ticket/add')?>" method="POST" enctype="multipart/form-data">
         <h2>New ticket</h2>
         <label for="title" class="flex flex-col">Title:
             <input class="w-100 bg-white rounded px-2 py-1" type="text" name="title" id="title">

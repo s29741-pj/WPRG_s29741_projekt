@@ -21,17 +21,5 @@
 <div class="gradient-header">
     Ticketpro
 </div>
-
-<!--<script>-->
-<!--    const sessionKey = 'user_session_active';-->
-<!---->
-<!--    localStorage.setItem(sessionKey, 'active');-->
-<!---->
-<!--    window.addEventListener('unload', () => {-->
-<!--        localStorage.removeItem(sessionKey);-->
-<!---->
-<!--        navigator.sendBeacon('/ticketpro_app/logout_session');-->
-<!--    });-->
-<!--</script>-->
 </body>
 </html>

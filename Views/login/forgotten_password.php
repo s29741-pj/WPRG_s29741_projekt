@@ -32,7 +32,7 @@ $reset_success = $msg->get_flash('reset_success');
     <?php if($reset_error){echo "<div class='text-center text-red-600'> $reset_error </div>";}?>
     <?php if($reset_success){echo "<div class='text-center text-green-600'> $reset_success </div>";}?>
 
-    <form action="/ticketpro_app/reset_password_request" method="POST"
+    <form action="<?=url('/reset_password_request')?>" method="POST"
           class="h-full flex flex-col justify-around items-center">
         <label for="email"></label>
         <input type="email" id="email" name="email" placeholder="Enter your email"
@@ -42,7 +42,7 @@ $reset_success = $msg->get_flash('reset_success');
         </button>
     </form>
 
-    <form action="/ticketpro_app/" method="GET" class="h-20 flex flex-col justify-around items-center">
+    <form action="<?=url('/')?>" method="GET" class="h-20 flex flex-col justify-around items-center">
         <label for="back"></label>
         <button id="back" name="back" class="cursor-pointer hover:underline hover:text-blue-400" type="submit">Back
         </button>

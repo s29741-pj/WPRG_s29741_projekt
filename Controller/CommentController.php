@@ -11,6 +11,7 @@ class CommentController
     private $commentRepo = null;
     private Msg $msg;
 
+
     public function __construct()
     {
         $this->commentRepo = CommentRepository::getInstance();
@@ -19,13 +20,15 @@ class CommentController
 
     public function addComment($ticket_id, $added, $comment_text, $user_id)
     {
+        $router = new Router();
+
         if (empty($comment_text)) {
             $this->msg->set_flash('comment_fail', "Empty comment can't be added.");
-            header("Location: /ticketpro_app/ticket");
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         } else {
             $this->commentRepo->addComment($ticket_id, $added, $comment_text, $user_id);
-            header('Location: /ticketpro_app/ticket');
+            header("Location:" . $router->getBasePath() . "/ticket");
             exit;
         }
     }
@@ -44,13 +47,15 @@ class CommentController
 
     public function updateComment(array $data)
     {
+        $router = new Router();
+
         if (isset($data['comment_id'], $data['content'])) {
             $comment_id = (int)$data['comment_id'];
             $content = $data['content'];
 
             try {
                 $this->commentRepo->editComment($comment_id, $content);
-                header("Location: /ticketpro_app/admin/comments");
+                header("Location:" . $router->getBasePath() . "/admin/comments");
             } catch (Exception $e) {
                 echo "Error updating comment: " . $e->getMessage();
             }
@@ -61,9 +66,11 @@ class CommentController
 
     public function deleteComment(int $comment_id)
     {
+        $router = new Router();
+
         try {
             $this->commentRepo->deleteComment($comment_id);
-            header("Location: /ticketpro_app/admin/comments");
+            header("Location:" . $router->getBasePath() . "/admin/comments");
         } catch (Exception $e) {
             echo "Error deleting comment: " . $e->getMessage();
         }

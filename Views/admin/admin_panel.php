@@ -5,7 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if ($_SESSION['role_id'] !== 1) {
-    header("Location: /ticketpro_app/ticket");
+    $router = new Router();
+    header("Location:" . $router->getBasePath() . "/ticket");
     exit;
 }
 
@@ -37,7 +38,7 @@ $commentsRepo = CommentRepository::getInstance();
 <div class="w-full bg-sky-700 text-white p-4 shadow-md">
     <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-2xl font-bold">Admin Panel</h1>
-        <a href="/ticketpro_app/ticket" class="bg-white text-sky-700 px-4 py-2 rounded hover:bg-gray-200">
+        <a href="<?= url('/ticket')?>" class="bg-white text-sky-700 px-4 py-2 rounded hover:bg-gray-200">
             Back to Tickets
         </a>
     </div>
@@ -46,19 +47,19 @@ $commentsRepo = CommentRepository::getInstance();
 <div class="container mx-auto mt-6">
 
     <nav class="flex space-x-4 mb-6">
-        <a href="/ticketpro_app/admin/users"
+        <a href="<?= url('/admin/users')?>"
            class="bg-sky-700 text-white px-4 py-2 rounded hover:bg-sky-800">
             Manage Users
         </a>
-        <a href="/ticketpro_app/admin/departments"
+        <a href="<?= url('/admin/departments')?>"
            class="bg-sky-700 text-white px-4 py-2 rounded hover:bg-sky-800">
             Manage Departments
         </a>
-        <a href="/ticketpro_app/admin/roles"
+        <a href="<?= url('/admin/roles')?>"
            class="bg-sky-700 text-white px-4 py-2 rounded hover:bg-sky-800">
             Manage Roles
         </a>
-        <a href="/ticketpro_app/admin/comments"
+        <a href="<?= url('/admin/comments')?>"
            class="bg-sky-700 text-white px-4 py-2 rounded hover:bg-sky-800">
             Manage Comments
         </a>
@@ -92,10 +93,10 @@ $commentsRepo = CommentRepository::getInstance();
                                 ?>
                             </td>
                             <td class="px-4 py-2">
-                                <a href="/ticketpro_app/admin/users/edit?id=<?= $user->getUserId() ?>"
+                                <a href="<?=url('/admin/users/edit?id=')?><?= $user->getUserId() ?>"
                                    class="text-blue-500 underline">Edit</a>
                                 |
-                                <a href="/ticketpro_app/admin/users/delete?id=<?= $user->getUserId() ?>"
+                                <a href="<?=url('/admin/users/delete?id=')?><?= $user->getUserId() ?>"
                                    class="text-red-500 underline">Delete</a>
                             </td>
                         </tr>
@@ -109,7 +110,7 @@ $commentsRepo = CommentRepository::getInstance();
     <!--  Manage Departments -->
     <?php if (isset($activeSection) && $activeSection === 'departments'): ?>
 
-        <a href="/ticketpro_app/admin/departments/add"
+        <a href="<?= url('/admin/departments/add')?>"
            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mb-4 inline-block">
             Add New Department
         </a>
@@ -133,10 +134,10 @@ $commentsRepo = CommentRepository::getInstance();
                             <td class="px-4 py-2"><?= htmlspecialchars($department->getDepartmentName()) ?></td>
                             <td class="px-4 py-2"><?= htmlspecialchars($department->getDepartmentHead()) ?></td>
                             <td class="px-4 py-2">
-                                <a href="/ticketpro_app/admin/departments/edit?id=<?= $department->getDepartmentId() ?>"
+                                <a href="<?=url('/admin/departments/edit?id=')?><?= $department->getDepartmentId() ?>"
                                    class="text-blue-500 underline">Edit</a>
                                 |
-                                <a href="/ticketpro_app/admin/departments/delete?id=<?= $department->getDepartmentId() ?>"
+                                <a href="<?= url('/admin/departments/delete?id=')?><?= $department->getDepartmentId() ?>"
                                    class="text-red-500 underline">Delete</a>
                             </td>
                         </tr>
@@ -153,7 +154,7 @@ $commentsRepo = CommentRepository::getInstance();
             <?php if (isset($roles)): ?>
                 <h2 class="text-xl font-bold mb-4">Manage Roles</h2>
 
-                <a href="/ticketpro_app/admin/roles/add"
+                <a href="<?= url('/admin/roles/add')?>"
                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mb-4 inline-block">
                     Add New Role
                 </a>
@@ -162,9 +163,9 @@ $commentsRepo = CommentRepository::getInstance();
                     <?php foreach ($roles as $role): ?>
                         <li class="mb-2">
                             <?= htmlspecialchars($role->getRole()) ?>
-                            <a href="/ticketpro_app/admin/roles/edit?id=<?= $role->getRoleId() ?>"
+                            <a href="<?= url('/admin/roles/edit?id=')?><?= $role->getRoleId() ?>"
                                class="text-blue-500 underline">Edit</a> |
-                            <a href="/ticketpro_app/admin/roles/delete?id=<?= $role->getRoleId() ?>"
+                            <a href="<?= url('/admin/roles/delete?id=')?><?= $role->getRoleId() ?>"
                                class="text-red-500 underline">Delete</a>
                         </li>
                     <?php endforeach; ?>
@@ -197,9 +198,9 @@ $commentsRepo = CommentRepository::getInstance();
                             <td class="px-4 py-2"><?= htmlspecialchars($comment->getAuthor()) ?></td>
                             <td class="px-4 py-2"><?= htmlspecialchars($comment->getTicketId()) ?></td>
                             <td class="px-4 py-2">
-                                <a href="/ticketpro_app/admin/comments/edit?id=<?= $comment->getCommentId() ?>"
+                                <a href="<?= url('/admin/comments/edit?id=')?><?= $comment->getCommentId() ?>"
                                    class="text-blue-500 underline">Edit</a> |
-                                <a href="/ticketpro_app/admin/comments/delete?id=<?= $comment->getCommentId() ?>"
+                                <a href="<?= url('/admin/comments/delete?id=')?><?= $comment->getCommentId() ?>"
                                    class="text-red-500 underline"
                                    onclick="return confirm('Are you sure you want to delete this comment?');">Delete</a>
                             </td>

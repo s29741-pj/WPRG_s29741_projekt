@@ -3,7 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 if (!isset($_SESSION['user_id']) && $_SESSION['role_id'] != 4) {
-    header("Location: /ticketpro_app/");
+    $router = new Router();
+    header("Location:" . $router->getBasePath() . "/");
     exit;
 }
 require_once __DIR__ . '/../../Repository/CommentRepository.php';
@@ -73,7 +74,7 @@ if ($_SESSION['role_id'] == 1) { // Admin zawsze może edytować
         </div>
 
         <!-- Edit Form -->
-        <form id="edit_form" class="space-y-4 hidden" method="POST" action="/ticketpro_app/ticket/edit"
+        <form id="edit_form" class="space-y-4 hidden" method="POST" action="<?=url('/ticket/edit')?>"
               enctype="multipart/form-data">
             <input type="hidden" name="ticket_id" value="<?= htmlspecialchars($selected_ticket->getTicketId()) ?>">
 
@@ -166,7 +167,7 @@ if ($_SESSION['role_id'] == 1) { // Admin zawsze może edytować
         </div>
 
 
-        <form action="/ticketpro_app/comment/add" method="POST" class="mt-4 space-y-2">
+        <form action="<?=url('/comment/add')?>" method="POST" class="mt-4 space-y-2">
             <input type="hidden" name="ticket_id" value="<?= htmlspecialchars($selected_ticket->getTicketId()) ?>">
             <?php if ($_SESSION['role_id'] != 4): ?>
                 <textarea name="comment" required maxlength="255" class="w-full rounded px-2 py-1 border"></textarea>
@@ -176,7 +177,7 @@ if ($_SESSION['role_id'] == 1) { // Admin zawsze może edytować
 
         </form>
         <?php if ($_SESSION['role_id'] != 4): ?>
-            <form action="/ticketpro_app/ticket/delete"></form>
+            <form action="<?=url('/ticket/delete')?>"></form>
         <?php endif; ?>
 
     </div>
@@ -189,7 +190,7 @@ if ($_SESSION['role_id'] == 1) { // Admin zawsze może edytować
         <div class="bg-white p-6 rounded-xl shadow-lg max-w-sm w-full text-center">
             <p class="text-lg font-semibold mb-4">Are you sure you want to delete this ticket?</p>
             <div class="flex justify-center gap-4">
-                <form method="POST" action="/ticketpro_app/ticket/delete">
+                <form method="POST" action="<?=url('/ticket/delete')?>">
                     <input type="hidden" name="ticket_id"
                            value="<?= htmlspecialchars($selected_ticket->getTicketId()) ?>">
                     <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Ok</button>

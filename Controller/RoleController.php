@@ -20,10 +20,12 @@ class RoleController
 
     public function storeRole($data)
     {
+        $router = new Router();
+
         if (isset($data['role'])) {
             try {
                 $this->roleRepo->addRole($data['role']);
-                header("Location: /ticketpro_app/admin/roles");
+                header("Location:" . $router->getBasePath() . "/admin/roles");
             } catch (Exception $e) {
                 echo "Error adding role: " . $e->getMessage();
             }
@@ -41,13 +43,15 @@ class RoleController
 
     public function updateRole($data)
     {
+        $router = new Router();
+
         if (isset($data['role_id'], $data['role'])) {
             $role_id = (int)$data['role_id'];
             $role = $data['role'];
 
             try {
                 $this->roleRepo->updateRole($role_id, $role);
-                header("Location: /ticketpro_app/admin/roles");
+                header("Location:" . $router->getBasePath() . "/admin/roles");
             } catch (Exception $e) {
                 echo "Error updating role: " . $e->getMessage();
             }
@@ -58,9 +62,11 @@ class RoleController
 
     public function deleteRole($id)
     {
+        $router = new Router();
+
         try {
             $this->roleRepo->deleteRole($id);
-            header("Location: /ticketpro_app/admin/roles");
+            header("Location:" . $router->getBasePath() . "/admin/roles");
         } catch (Exception $e) {
             echo "Error deleting role: " . $e->getMessage();
         }
