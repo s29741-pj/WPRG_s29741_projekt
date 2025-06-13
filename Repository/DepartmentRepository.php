@@ -44,7 +44,7 @@ class DepartmentRepository
         $stmt->execute([$department_name, $department_head]);
     }
 
-    public function getDepartmentById(int $department_id): ?Department
+    public function getDepartmentById(?int $department_id): ?Department
     {
         $stmt = $this->pdo->prepare("
         SELECT

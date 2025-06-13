@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../Repository/CommentRepository.php';
 require_once __DIR__ . '/../Flash/Msg.php';
 
-use FlashMsg\msg;
+use FlashMsg\Msg;
 
 
 class CommentController
@@ -14,7 +14,7 @@ class CommentController
     public function __construct()
     {
         $this->commentRepo = CommentRepository::getInstance();
-        $this->msg = Msg::getInstance();
+        $this->msg = new Msg();
     }
 
     public function addComment($ticket_id, $added, $comment_text, $user_id)

@@ -13,10 +13,10 @@ if (!isset($_SESSION['user_id']) && !$_SESSION['role_id'] == 4) {
     exit;
 }
 
-use FlashMsg\msg;
+use FlashMsg\Msg;
 
-$msg = Msg::getInstance();
-$loginCtrl = LoginController::getInstance();
+$msg = new Msg();
+$loginCtrl = new LoginController();
 
 $login_success = $msg->get_flash('login_success');
 $signup_success = $msg->get_flash('register_success');

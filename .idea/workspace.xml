@@ -5,43 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dbc7d92-401b-4819-a8be-cbbf4df9f249" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Controller/DepartmentController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Controller/RoleController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/Role.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Repository/RoleRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/admin/add_department.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/admin/add_role.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/admin/admin_panel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/admin/edit_comment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/admin/edit_department.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/admin/edit_role.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/admin/edit_user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/login/reset_password.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Auth/LoginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/RenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/RenderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/TicketController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Router.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/backup.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Data/backup.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/setup_test_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Data/setup_test_data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Attachment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Attachment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Department.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Department.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flash/Msg.php" beforeDir="false" afterPath="$PROJECT_DIR$/Flash/Msg.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repository/CommentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/CommentRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Repository/DepartmentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/DepartmentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repository/TicketRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/TicketRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/admin_panel/admin_view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/admin/edit_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/admin/edit_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/layout/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/layout/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/layout/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/layout/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/login/forgotten_password.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login/forgotten_password.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/login/login_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login/login_page.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/login/register_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login/register_page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_create.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_create.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +146,7 @@
       <workItem from="1749628758279" duration="8917000" />
       <workItem from="1749669943253" duration="16884000" />
       <workItem from="1749753796120" duration="19728000" />
-      <workItem from="1749800544482" duration="22258000" />
+      <workItem from="1749800544482" duration="27664000" />
     </task>
     <servers />
   </component>

@@ -7,9 +7,9 @@ class User
     private string $name;
     private string $surname;
     private string $email;
-    private int $department_id;
+    private ?int $department_id;
 
-    public function __construct(int $user_id, int $role_id, string $name, string $surname, string $email, int $department_id)
+    public function __construct(int $user_id, int $role_id, string $name, string $surname, string $email, ?int $department_id)
     {
         $this->user_id = $user_id;
         $this->role_id = $role_id;
@@ -21,7 +21,8 @@ class User
 
     public static function fromArray(array $data): self
     {
-        return new self($data['user_id'], $data['role_id'], $data['name'], $data['surname'], $data['email'], $data['department_id']);
+        return new self($data['user_id'], $data['role_id'], $data['name'], $data['surname'], $data['email'], isset($data['department_id']) ? (int)$data['department_id'] : null
+        );
     }
 
     public function getUserId(): int
@@ -64,7 +65,7 @@ class User
         $this->email = $email;
     }
 
-    public function getUserDepartment(): int
+    public function getUserDepartment(): ?int
     {
         return $this->department_id;
     }

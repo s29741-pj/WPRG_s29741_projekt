@@ -6,7 +6,7 @@ require_once __DIR__ . '/../Repository/UserRepository.php';
 require_once __DIR__ . '/../Repository/AttachmentRepository.php';
 require_once __DIR__ . '/../Flash/Msg.php';
 
-use FlashMsg\msg;
+use FlashMsg\Msg;
 
 class ticketController
 {
@@ -24,7 +24,7 @@ class ticketController
         $this->departmentRepo = DepartmentRepository::getInstance();
         $this->userRepo = UserRepository::getInstance();
         $this->attachmentRepo = AttachmentRepository::getInstance();
-        $this->msg = Msg::getInstance();
+        $this->msg = new Msg();
     }
 
     public function editTicket(array $post, array $files)

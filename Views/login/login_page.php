@@ -3,8 +3,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-use FlashMsg\msg;
-$msg = Msg::getInstance();
+use FlashMsg\Msg;
+$msg = new Msg();
 
 $error = $msg->get_flash('login_error');
 ?>

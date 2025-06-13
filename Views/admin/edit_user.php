@@ -30,7 +30,8 @@
         </select>
 
         <label class="block text-gray-700 text-sm font-bold mb-2">Department</label>
-        <select name="department_id" class="w-full border px-4 py-2 mb-4" required>
+        <select name="department_id" class="w-full border px-4 py-2 mb-4">
+            <option value="" <?= is_null($user->getUserDepartment()) ? 'selected' : '' ?>>No Department</option>
             <?php foreach ($departments as $department): ?>
                 <option value="<?= htmlspecialchars($department->getDepartmentId()) ?>"
                     <?= $user->getUserDepartment() == $department->getDepartmentId() ? 'selected' : '' ?>>
@@ -38,6 +39,7 @@
                 </option>
             <?php endforeach; ?>
         </select>
+
 
         <button type="submit" class="bg-sky-700 text-white px-4 py-2 rounded">Save</button>
         <a href="/ticketpro_app/admin/users" class="text-gray-700 underline ml-4">Cancel</a>

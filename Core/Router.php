@@ -1,5 +1,7 @@
 <?php
 
+use FlashMsg\Msg;
+
 require_once __DIR__ . '/../Controller/RenderController.php';
 require_once __DIR__ . '/../Controller/UserController.php';
 require_once __DIR__ . '/../Controller/TicketController.php';
@@ -19,9 +21,11 @@ class Router
         $render_controller = new RenderController();
         $ticket_controller = new TicketController();
         $comment_controller = new CommentController();
-        $loginController = LoginController::getInstance();
+        $loginController = new LoginController();
         $logoutController = new LogoutController();
-        $registerController = RegisterController::getInstance();
+        $registerController = new RegisterController();
+
+        $msg = new Msg();
 
         $parsed = parse_url($uri);
         $path = $parsed['path'];
@@ -63,8 +67,6 @@ class Router
                 header("Location: /ticketpro_app/login_page.php");
                 exit;
             }
-        } elseif ($path === '/ticketpro_app/register_page' && $method === 'GET') {
-            $render_controller->registerPage();
         } elseif ($path === '/ticketpro_app/logout' && $method === 'GET') {
             $logoutController->logout();
         } elseif ($path === '/ticketpro_app/ticket/edit' && $method === 'POST' && isset($_POST['ticket_id'])) {
@@ -129,17 +131,51 @@ class Router
         } elseif ($path === '/ticketpro_app/admin/roles/delete' && $method === 'GET') {
             $roleController = new RoleController();
             $roleController->deleteRole($_GET['id']);
-        }
-        elseif ($path === '/ticketpro_app/admin/comments/edit' && $method === 'GET') {
+        } elseif ($path === '/ticketpro_app/admin/comments/edit' && $method === 'GET') {
             $comment_controller = new CommentController();
             $comment_controller->editCommentForm((int)$_GET['id']);
         } elseif ($path === '/ticketpro_app/admin/comments/edit' && $method === 'POST') {
             $comment_controller = new CommentController();
             $comment_controller->updateComment($_POST);
-        }
-        elseif ($path === '/ticketpro_app/admin/comments/delete' && $method === 'GET') {
+        } elseif ($path === '/ticketpro_app/admin/comments/delete' && $method === 'GET') {
             $comment_controller = new CommentController();
             $comment_controller->deleteComment((int)$_GET['id']);
+        } elseif ($path === '/ticketpro_app/register_page' && $method === 'GET') {
+            $render_controller->registerPage();
+        } elseif ($path === '/ticketpro_app/forgotten') {
+            $render_controller->forgottenPassword();
+        } elseif ($path === '/ticketpro_app/activate_account' && $method === 'GET') {
+            if (isset($_GET['token'])) {
+                $registerController->activateAccount($_GET['token']);
+            } else {
+                echo "No activation token provided.";
+            }
+        } elseif ($path === '/ticketpro_app/reset_password_request' && $method === 'POST') {
+            if (isset($_POST['email'])) {
+                $loginController->resetPasswordRequest($_POST['email']);
+            } else {
+                echo "Email is required.";
+            }
+        } elseif ($path === '/ticketpro_app/reset_password' && $method === 'GET') {
+            $viewPath = __DIR__ . '/../Views/login/reset_password.php';
+            renderSite($viewPath);
+        } elseif ($path === '/ticketpro_app/reset_password_confirm' && $method === 'POST') {
+            if (isset($_POST['token'], $_POST['password'], $_POST['password_confirm'])) {
+                if ($_POST['password'] !== $_POST['password_confirm']) {
+                    $msg->set_flash('reset_error', 'Passwords do not match.');
+                    header("Location: " . $_SERVER['HTTP_REFERER']);
+                    exit;
+                }
+                $loginController->resetPassword($_POST['token'], $_POST['password']);
+            } else {
+                echo "All fields are required.";
+            }
+        } elseif ($path === '/ticketpro_app/logout_session' && $method === 'POST') {
+            session_start();
+            session_unset();
+            session_destroy();
+            http_response_code(200);
+            exit;
         } else {
             echo "No matching route found.<br>";
         }

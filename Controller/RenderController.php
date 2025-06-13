@@ -8,7 +8,7 @@ require_once __DIR__ . '/../Model/Ticket.php';
 require_once __DIR__ . '/../Core/Render.php';
 require_once __DIR__ . '/../Flash/Msg.php';
 
-use FlashMsg\msg;
+use FlashMsg\Msg;
 
 
 class RenderController
@@ -38,6 +38,12 @@ class RenderController
     public function registerPage()
     {
         $viewPath = __DIR__ . '/../Views/login/register_page.php';
+        renderSite($viewPath);
+    }
+
+    public function forgottenPassword()
+    {
+        $viewPath = __DIR__ . '/../Views/login/forgotten_password.php';
         renderSite($viewPath);
     }
 
