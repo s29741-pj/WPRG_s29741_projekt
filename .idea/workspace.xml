@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6dbc7d92-401b-4819-a8be-cbbf4df9f249" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Views/login/reset_password.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/RenderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/RenderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/TicketController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Router.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flash/Msg.php" beforeDir="false" afterPath="$PROJECT_DIR$/Flash/Msg.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repository/DepartmentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/DepartmentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/admin/edit_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/admin/edit_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/layout/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/layout/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/layout/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/layout/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/login/forgotten_password.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login/forgotten_password.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/login/login_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login/login_page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/login/register_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/login/register_page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ticket/ticket_menu.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/todo.txt" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" id="a0b19e65-411d-461f-8bce-6d5d7bc6efe1" name="LocalHost" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="D:/PJATK/sem_4/WPRG/Projekt/ticketpro_app" />
+        </path_mappings>
+      </server>
+    </servers>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2wBwgFzB5pDr1bQUTfoFWdX1jFJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript Debug.admin_view.php.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "PHP Script.RoleRepository.php.executor": "Run",
+    "PHP Script.TicketRepository.php.executor": "Debug",
+    "PHP Web Page.TicketPro.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/xampp/htdocs/ticketpro",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "ml.llm.AIAssistantPromptsLibrary",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
+    ]
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-PS-251.26094.133" />
+        <option value="bundled-php-predefined-a98d8de5180a-c5828cf854d9-com.jetbrains.php.sharedIndexes-PS-251.26094.133" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6dbc7d92-401b-4819-a8be-cbbf4df9f249" name="Changes" comment="" />
+      <created>1745528384695</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1745528384695</updated>
+      <workItem from="1745528385525" duration="3842000" />
+      <workItem from="1745532325414" duration="6275000" />
+      <workItem from="1745874218394" duration="7057000" />
+      <workItem from="1745881333291" duration="672000" />
+      <workItem from="1745882024661" duration="1272000" />
+      <workItem from="1745883323181" duration="2396000" />
+      <workItem from="1745962033534" duration="7484000" />
+      <workItem from="1746044310089" duration="15117000" />
+      <workItem from="1746479295240" duration="5440000" />
+      <workItem from="1746564187191" duration="12348000" />
+      <workItem from="1746646639997" duration="14547000" />
+      <workItem from="1746737582152" duration="10124000" />
+      <workItem from="1746886579933" duration="8497000" />
+      <workItem from="1746895539700" duration="2974000" />
+      <workItem from="1746898633820" duration="354000" />
+      <workItem from="1746944899443" duration="4597000" />
+      <workItem from="1746951338904" duration="13000" />
+      <workItem from="1747566057688" duration="616000" />
+      <workItem from="1747853632607" duration="7352000" />
+      <workItem from="1748160962018" duration="1778000" />
+      <workItem from="1748184142572" duration="7746000" />
+      <workItem from="1748288297413" duration="14087000" />
+      <workItem from="1748373485715" duration="11376000" />
+      <workItem from="1748387645680" duration="2678000" />
+      <workItem from="1748469604861" duration="5303000" />
+      <workItem from="1748549906966" duration="43000" />
+      <workItem from="1748550227945" duration="2923000" />
+      <workItem from="1748651723247" duration="5176000" />
+      <workItem from="1748775023650" duration="2000" />
+      <workItem from="1749242878492" duration="18000" />
+      <workItem from="1749373818846" duration="3231000" />
+      <workItem from="1749390139285" duration="10313000" />
+      <workItem from="1749401423849" duration="75000" />
+      <workItem from="1749496382921" duration="72000" />
+      <workItem from="1749496505271" duration="16444000" />
+      <workItem from="1749586820088" duration="13141000" />
+      <workItem from="1749628758279" duration="8917000" />
+      <workItem from="1749669943253" duration="16884000" />
+      <workItem from="1749753796120" duration="19728000" />
+      <workItem from="1749800544482" duration="27664000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
