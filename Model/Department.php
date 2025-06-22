@@ -12,13 +12,12 @@ class Department
         $this->department_name = $department_name;
     }
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $row): Department
     {
-        return new self(
-            $data['department_id'],
-            $data['department_head'],
-            $data['department_name']
-        );
+        $id = isset($row['department_id']) && $row['department_id'] !== null ? (int)$row['department_id'] : 0;
+        $head = isset($row['department_head']) && $row['department_head'] !== null ? (int)$row['department_head'] : 0;
+        $name = $row['department_name'] ?? '';
+        return new Department($id, $head, $name);
     }
 
     public function getDepartmentId(): int
